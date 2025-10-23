@@ -3,22 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact | Bionic Systems One - Request a Demo</title>
-  <meta name="description" content="Contact Bionic Systems One to request a demo or strategy call for AI CRM, Voice Automation, and custom solutions. Netlify Form ready." />
+  <title>Contact Us | Bionic Systems One</title>
+  <meta name="description" content="Request a free demo or contact the Bionic Systems One sales team." />
   <style>html{scroll-behavior:smooth}</style>
-  <!-- Tailwind Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* ------------------------------------------------------------- */
-    /* DEFAULT THEME: DARK MODE (Deep Indigo & Aqua Gradient) */
-    /* ------------------------------------------------------------- */
-    :root{
-      --bg-color: #060918; /* Very Dark Blue-Black */
-      --text-color: #e0e7ff; /* Light Indigo/Lavender */
-      --secondary-text: #a5b4fc; /* Light Purple for detail */
-      --primary-color: #4338ca; /* Indigo 700 */
-      --cta-color: #06b6d4; /* Cyan 600 */
-      --card-bg: rgba(255, 255, 255, 0.03); /* Glass base */
+    /* Shared Styles from index.html (Theme variables, accents, shadows, etc.) */
+    :root {
+      --bg-color: #060918;
+      --text-color: #e0e7ff;
+      --primary-color: #4338ca;
+      --cta-color: #06b6d4;
+      --card-bg: rgba(255, 255, 255, 0.03);
       --card-border: rgba(255, 255, 255, 0.06);
       --input-bg: rgba(0, 0, 0, 0.5);
     }
@@ -28,99 +24,79 @@
         position: relative;
         transition: background-color 0.3s, color 0.3s;
     }
-
-    /* ------------------------------------------------------------- */
-    /* LIGHT MODE OVERRIDES */
-    /* ------------------------------------------------------------- */
+    h1, h2, h3, h4, span, a, p {
+        color: var(--text-color) !important;
+    }
     body.light-mode {
-      --bg-color: #f8fafc; /* Soft White/Light Gray */
-      --text-color: #0f172a; /* Dark Slate for primary text */
-      --secondary-text: #475569; /* Medium Gray */
+      --bg-color: #f8fafc;
+      --text-color: #0f172a;
       --card-bg: white;
       --card-border: #e2e8f0;
-      --input-bg: white;
-      --shadow-color-light: rgba(67, 56, 202, 0.15);
     }
-    
-    body.light-mode .glass {
-        background: var(--card-bg);
-        backdrop-filter: none;
-        border: 1px solid var(--card-border);
-        box-shadow: 0 4px 12px var(--shadow-color-light);
+    body.light-mode h1, body.light-mode h2, body.light-mode h3, body.light-mode h4, body.light-mode a, body.light-mode p,
+    body.light-mode .viz-dark-text, body.light-mode .footer-text {
+        color: var(--text-color) !important;
     }
-    
-    /* Inverting specific elements for light mode */
-    body.light-mode .text-slate-200, 
-    body.light-mode .text-slate-300, 
-    body.light-mode .text-slate-400 { 
-        color: var(--text-color) !important; 
-    }
-    body.light-mode .text-white { 
-        color: white !important; 
-    }
-    body.light-mode header {
-        border-bottom-color: #e2e8f0;
-    }
-    body.light-mode .border-white\/5, 
-    body.light-mode .border-white\/10 {
-        border-color: #e2e8f0 !important;
-    }
-    body.light-mode .bg-black\/50 {
-        background-color: white !important;
-        color: var(--text-color);
-    }
-
-    /* ------------------------------------------------------------- */
-    /* SHARED STYLES */
-    /* ------------------------------------------------------------- */
+    body.light-mode .text-white { color: white !important; }
+    body.light-mode .text-cyan-400 { color: var(--cta-color) !important; }
+    body.light-mode .glass { background: var(--card-bg); backdrop-filter: none; border: 1px solid var(--card-border); box-shadow: 0 4px 12px rgba(67, 56, 202, 0.15); }
+    body.light-mode .border-white\/5, body.light-mode .border-white\/10 { border-color: #e2e8f0 !important; }
 
     .accent-text{
       background: linear-gradient(90deg, var(--cta-color) 10%, #4f46e5 50%, var(--primary-color) 90%);
       -webkit-background-clip: text;
       background-clip: text;
-      color: transparent;
+      color: transparent !important;
     }
     .glass {
       background: var(--card-bg);
       backdrop-filter: blur(6px);
       border: 1px solid var(--card-border);
     }
-    .neon-glow{
-      box-shadow: 0 0 20px rgba(6, 182, 212, 0.1), 0 0 25px rgba(67, 56, 202, 0.1) inset;
-    }
     #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
     #mobile-menu.active { max-height: 300px; }
-    /* Override Tailwind's default text colors */
-    .text-slate-200 { color: var(--accent-color); }
-    .text-slate-300 { color: #c7d2fe; }
-    .text-slate-400 { color: #a5b4fc; }
-
-    /* Custom Input Style for Consistency */
+    .menu-icon-wrapper { position: relative; width: 24px; height: 24px; }
+    .menu-icon-wrapper > i { position: absolute; top: 0; left: 0; transition: opacity 0.2s; }
+    
+    /* Specific to Contact Page */
     .contact-input {
         background-color: var(--input-bg);
         border: 1px solid var(--card-border);
         color: var(--text-color);
-        transition: border-color 0.3s;
+        transition: all 0.2s;
+        /* Custom styling for the select dropdown arrow in dark mode */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23a5b4fc'%3E%3Cpath d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 0.8rem 0.8rem;
     }
     .contact-input:focus {
         border-color: var(--cta-color);
+        box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.5);
         outline: none;
     }
     body.light-mode .contact-input {
+        background-color: var(--input-bg);
         color: var(--text-color);
+        border-color: #e2e8f0;
+        /* Custom styling for the select dropdown arrow in light mode */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23475569'%3E%3Cpath d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/%3E%3C/svg%3E");
     }
   </style>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body class="min-h-screen antialiased font-['Inter',sans-serif]">
 
-  <!-- Header -->
+  <!-- Header (Standardized) -->
   <header class="max-w-6xl mx-auto p-6 sticky top-0 bg-[var(--bg-color)]/80 backdrop-blur-sm z-30 border-b border-white/5">
     <div class="flex items-center justify-between relative">
         <div class="flex items-center gap-3">
           <a href="index.html" class="flex items-center gap-3">
             <img src="assets/logo.png" alt="Bionic Systems One Logo" class="w-10 h-10 object-contain rounded-full border border-white/10"/>
-            <div class="hidden sm:block">
+            <div>
               <h1 class="text-xl font-extrabold tracking-tight">Bionic Systems One</h1>
               <div class="text-xs text-slate-400">Next‑Gen AI Systems</div>
             </div>
@@ -130,20 +106,21 @@
         <!-- Desktop Nav -->
         <nav class="hidden md:flex gap-8 items-center text-sm font-medium">
           <a href="solutions.html" class="hover:text-cyan-400 transition">Solutions</a>
-          <a href="index.html#clients" class="hover:text-cyan-400 transition">Clients</a>
+          <a href="clients.html" class="hover:text-cyan-400 transition">Clients</a>
           <a href="about.html" class="hover:text-cyan-400 transition">About & Vision</a>
           <a href="contact.html" class="text-cyan-400 transition">Contact</a>
-          <!-- Toggle Button -->
-          <button id="theme-toggle" class="p-2 rounded-full glass hover:bg-white/10 transition border border-white/10">
-              <i id="theme-icon" class="fas fa-sun text-cyan-400 w-4 h-4"></i>
+          <button class="theme-toggle-btn p-2 rounded-full glass hover:bg-white/10 transition border border-white/10">
+              <i class="theme-toggle-icon fas fa-sun text-cyan-400 w-4 h-4"></i>
           </button>
-          <a href="contact.html" class="ml-2 inline-block px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold text-sm shadow-lg hover:shadow-cyan-400/30 transition-all">Request a Demo</a>
+          <a href="contact.html" class="ml-2 inline-block px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold text-sm shadow-lg hover:shadow-cyan-400/30 transition-all cta-button">Request a Demo</a>
         </nav>
         
         <!-- Mobile Menu Button -->
         <button id="mobileBtn" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 rounded-xl glass hover:bg-white/10 transition border border-white/5">
-            <svg id="menuIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            <svg id="closeIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <div class="menu-icon-wrapper">
+                <i id="menuIcon" class="fas fa-bars w-6 h-6"></i>
+                <i id="closeIcon" class="fas fa-times w-6 h-6 hidden"></i>
+            </div>
         </button>
     </div>
     
@@ -151,7 +128,7 @@
     <div id="mobile-menu" class="md:hidden mt-4 glass rounded-xl w-full border border-white/10">
         <nav class="flex flex-col gap-3 p-4 text-sm font-medium">
             <a href="solutions.html" class="py-2 border-b border-white/5 hover:text-cyan-400" onclick="closeMobileMenu()">Solutions</a>
-            <a href="index.html#clients" class="py-2 border-b border-white/5 hover:text-cyan-400" onclick="closeMobileMenu()">Clients</a>
+            <a href="clients.html" class="py-2 border-b border-white/5 hover:text-cyan-400" onclick="closeMobileMenu()">Clients</a>
             <a href="about.html" class="py-2 border-b border-white/5 hover:text-cyan-400" onclick="closeMobileMenu()">About & Vision</a>
             <a href="contact.html" class="py-2 text-cyan-400" onclick="closeMobileMenu()">Contact</a>
             <a href="contact.html" class="mt-4 text-center px-4 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold" onclick="closeMobileMenu()">Request a Demo</a>
@@ -160,72 +137,89 @@
   </header>
   <!-- End Header -->
 
-  <main>
-    <!-- Contact Hero/Form -->
-    <section class="max-w-4xl mx-auto px-6 py-12 md:py-20">
-      <div class="text-center mb-10">
-          <span class="text-sm font-semibold uppercase tracking-widest text-cyan-400">Start Your Automation Journey</span>
-          <h2 class="text-4xl md:text-5xl font-extrabold leading-tight mt-3 text-slate-200">Request a Strategy Call or Demo.</h2>
-          <p class="mt-4 text-slate-400 max-w-2xl mx-auto text-lg">Tell us about your biggest scaling bottleneck. We'll map a solution powered by our BS1 Logic Core and estimate your immediate ROI.</p>
-      </div>
-
-      <div class="glass p-8 rounded-3xl neon-glow border border-indigo-600/30">
-        <!-- Netlify form configured for automatic submission handling -->
-        <form name="contact" method="POST" data-netlify="true" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <input type="hidden" name="form-name" value="contact" />
-          
-          <label class="flex flex-col">
-            <span class="text-sm text-slate-300 mb-1">Full Name *</span>
-            <input name="name" required class="p-3 rounded-lg contact-input" placeholder="Elon Musk" />
-          </label>
-          
-          <label class="flex flex-col">
-            <span class="text-sm text-slate-300 mb-1">Work Email *</span>
-            <input type="email" name="email" required class="p-3 rounded-lg contact-input" placeholder="elon@spacex.com" />
-          </label>
-          
-          <label class="flex flex-col">
-            <span class="text-sm text-slate-300 mb-1">Company / Website</span>
-            <input name="company" class="p-3 rounded-lg contact-input" placeholder="SpaceX / starlink.com" />
-          </label>
-
-          <label class="flex flex-col">
-            <span class="text-sm text-slate-300 mb-1">Primary Automation Goal</span>
-            <select name="goal" class="p-3 rounded-lg contact-input appearance-none">
-              <option>Select Goal</option>
-              <option value="Lead Gen/Scraping">Lead Generation / Data Scraping</option>
-              <option value="Voice Automation">Voice & Telephony Automation</option>
-              <option value="CRM/Pipeline">CRM & Pipeline Efficiency</option>
-              <option value="Custom Workflow">Custom AI Workflow</option>
-              <option value="Other">Other / AGI Partnership</option>
-            </select>
-          </label>
-
-          <label class="flex flex-col md:col-span-2">
-            <span class="text-sm text-slate-300 mb-1">Describe Your Bottleneck / Project *</span>
-            <textarea name="message" rows="5" required class="p-3 rounded-lg contact-input" placeholder="I need to automate the qualification of inbound leads and ensure 24/7 coverage."></textarea>
-          </label>
-
-          <div class="md:col-span-2 flex items-center justify-between mt-4">
-            <div class="text-sm text-slate-400">
-              Or email us directly at <a href="mailto:sales@bionicsystemsone.com" class="underline hover:text-cyan-400">sales@bionicsystemsone.com</a>
-            </div>
-            <button type="submit" class="px-6 py-3 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold shadow-lg hover:shadow-cyan-400/30 transition-all">
-              Send Request
-            </button>
-          </div>
-        </form>
-        
-        <!-- Success Message Placeholder -->
-        <div id="success-message" class="hidden mt-6 p-4 rounded-xl bg-green-900/50 border border-green-500 text-green-200">
-            Thank you! Your request has been successfully submitted. We will connect with you within 24 hours.
+  <main class="relative z-10">
+    <!-- Contact Form Section -->
+    <section class="max-w-4xl mx-auto px-6 py-16">
+        <div class="text-center mb-10">
+            <h2 class="text-5xl font-extrabold leading-tight">Start the <span class="accent-text">AI Conversation</span>.</h2>
+            <p class="mt-4 text-xl text-slate-400 max-w-2xl mx-auto">Tell us about your toughest operational bottleneck. We'll show you how AI solves it.</p>
         </div>
-        
-      </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Form -->
+            <form action="/success.html" name="contact" method="POST" data-netlify="true" class="glass p-8 rounded-3xl border border-indigo-600/20 shadow-xl">
+                <h3 class="text-2xl font-bold mb-6">Request a Free Strategy Session</h3>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-slate-300 mb-1">Full Name *</label>
+                        <input type="text" id="name" name="name" required class="w-full p-3 rounded-xl contact-input" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-slate-300 mb-1">Work Email *</label>
+                        <input type="email" id="email" name="email" required class="w-full p-3 rounded-xl contact-input" placeholder="john@company.com">
+                    </div>
+                    <div>
+                        <label for="company" class="block text-sm font-medium text-slate-300 mb-1">Company / Startup Name</label>
+                        <input type="text" id="company" name="company" class="w-full p-3 rounded-xl contact-input" placeholder="Acme Corp">
+                    </div>
+                    
+                    <!-- NEW FIELD: Primary Automation Goal -->
+                    <div>
+                        <label for="goal" class="block text-sm font-medium text-slate-300 mb-1">Primary Automation Goal</label>
+                        <select id="goal" name="goal" class="w-full p-3 rounded-xl contact-input">
+                            <option value="" disabled selected>Select your top priority</option>
+                            <option value="Lead Gen/Data Scraping">Lead Generation / Data Scraping</option>
+                            <option value="Voice Automation">Voice & Telephony Automation</option>
+                            <option value="CRM/Pipeline">CRM & Pipeline Efficiency</option>
+                            <option value="Custom Workflow">Custom AI Workflow</option>
+                            <option value="Compliance/Security">Compliance & Security Automation</option>
+                            <option value="Other">Other / Partnership Inquiry</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="issue" class="block text-sm font-medium text-slate-300 mb-1">Describe your AI needs / bottleneck *</label>
+                        <textarea id="issue" name="issue" rows="4" required class="w-full p-3 rounded-xl contact-input" placeholder="I need to automate the qualification of inbound leads and ensure 24/7 coverage."></textarea>
+                    </div>
+                    <button type="submit" class="w-full px-6 py-3 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold text-lg shadow-lg hover:shadow-cyan-400/40 transition-all cta-button">
+                        Submit Request
+                    </button>
+                </div>
+            </form>
+
+            <!-- Contact Info -->
+            <div class="lg:mt-10">
+                <h3 class="text-2xl font-bold mb-4 text-cyan-400">Direct Contact</h3>
+                <div class="space-y-6 text-slate-300">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-envelope text-xl text-cyan-400 mt-1"></i>
+                        <div>
+                            <p class="font-semibold">Sales Inquiries</p>
+                            <a href="mailto:sales@bionicsysone.com" class="hover:text-cyan-400 transition">sales@bionicsysone.com</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-phone-alt text-xl text-cyan-400 mt-1"></i>
+                        <div>
+                            <p class="font-semibold">24/7 Support Line</p>
+                            <a href="tel:+18005550199" class="hover:text-cyan-400 transition">+1 (800) 555-0199</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-map-marker-alt text-xl text-cyan-400 mt-1"></i>
+                        <div>
+                            <p class="font-semibold">Corporate Headquarters</p>
+                            <p>101 AI Drive, Suite 200, Silicon Valley, CA 94000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer (Standardized) -->
   <footer class="mt-16 border-t border-white/6 py-10">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-8">
         <div class="col-span-2 md:col-span-2">
@@ -233,15 +227,15 @@
                 <img src="assets/logo.png" alt="Bionic Systems One Logo" class="w-10 h-10 object-contain"/>
                 <span class="text-xl font-extrabold tracking-tight">Bionic Systems One</span>
             </a>
-            <p class="text-sm text-slate-400 max-w-xs">Building the intelligent foundation for tomorrow's business and beyond. Specializing in capital-efficient AI automation.</p>
+            <p class="text-sm text-slate-400 max-w-xs footer-text">Building the intelligent foundation for tomorrow's business and beyond. Specializing in capital-efficient AI automation.</p>
         </div>
         
         <!-- Quick Links -->
         <div>
-            <h4 class="font-semibold text-white mb-3">Quick Links</h4>
+            <h4 class="font-semibold text-cyan-400 mb-3">Quick Links</h4>
             <ul class="space-y-2 text-sm text-slate-400">
                 <li><a href="solutions.html" class="hover:text-cyan-400 transition">Our Solutions</a></li>
-                <li><a href="index.html#clients" class="hover:text-cyan-400 transition">Clients</a></li>
+                <li><a href="clients.html" class="hover:text-cyan-400 transition">Clients</a></li>
                 <li><a href="about.html" class="hover:text-cyan-400 transition">About & Vision</a></li>
                 <li><a href="contact.html" class="hover:text-cyan-400 transition">Request Demo</a></li>
             </ul>
@@ -249,34 +243,43 @@
         
         <!-- Legal -->
         <div>
-            <h4 class="font-semibold text-white mb-3">Legal</h4>
+            <h4 class="font-semibold text-cyan-400 mb-3">Legal</h4>
             <ul class="space-y-2 text-sm text-slate-400">
                 <li><a href="privacy.html" class="hover:text-cyan-400 transition">Privacy Policy</a></li>
                 <li><a href="terms.html" class="hover:text-cyan-400 transition">Terms of Service</a></li>
             </ul>
         </div>
 
-        <!-- Social -->
+        <!-- Social & Theme Toggle (Mobile Friendly) -->
         <div>
-            <h4 class="font-semibold text-white mb-3">Connect</h4>
+            <h4 class="font-semibold text-cyan-400 mb-3">Connect</h4>
             <div class="flex space-x-4 text-xl">
                 <a href="https://instagram.com/bionicsystemsone" target="_blank" aria-label="Instagram" class="hover:text-cyan-400 transition"><i class="fab fa-instagram"></i></a>
                 <a href="https://twitter.com/bionicsysone" target="_blank" aria-label="Twitter/X" class="hover:text-cyan-400 transition"><i class="fab fa-twitter"></i></a>
                 <a href="#" aria-label="Facebook" class="hover:text-cyan-400 transition"><i class="fab fa-facebook-f"></i></a>
             </div>
-            <p class="text-xs text-slate-600 mt-4">Built with ❤️ and Netlify</p>
+            
+            <!-- NEW THEME TOGGLE FOR MOBILE ACCESSIBILITY -->
+            <button class="theme-toggle-btn mt-4 px-4 py-2 rounded-full glass border border-white/10 text-sm flex items-center gap-2 hover:bg-white/10 transition">
+                <i class="theme-toggle-icon fas fa-sun text-cyan-400 w-4 h-4"></i>
+                <span class="viz-dark-text">Toggle Theme</span>
+            </button>
+            
+            <p class="text-xs text-slate-600 mt-4 footer-text">Built with ❤️ and Netlify</p>
         </div>
     </div>
-    <div class="max-w-6xl mx-auto px-6 mt-10 text-center text-sm text-slate-500">
-        © <span id="year-footer-contact"></span> Bionic Systems One. All rights reserved.
+    <div class="max-w-6xl mx-auto px-6 mt-10 text-center text-sm text-slate-500 footer-text">
+        © <span id="year-footer"></span> Bionic Systems One. All rights reserved.
     </div>
   </footer>
   <!-- End Footer -->
 
   <script>
-    document.getElementById('year-footer-contact').textContent = new Date().getFullYear();
+    document.getElementById('year-footer').textContent = new Date().getFullYear();
+
+    // --- SHARED FUNCTIONS (Header, Mobile Menu, Theme Toggle) ---
     
-    // Mobile Menu Logic (Shared across all pages)
+    // Mobile Menu Logic 
     const mobileBtn = document.getElementById('mobileBtn');
     const mobileMenu = document.getElementById('mobile-menu');
     const menuIcon = document.getElementById('menuIcon');
@@ -296,58 +299,43 @@
       closeIcon.classList.toggle('hidden', !isExpanded);
     });
 
-    // Theme Toggle Logic (Shared across all pages)
-    const themeToggle = document.getElementById('theme-toggle');
+    // Theme Toggle Logic
     const body = document.body;
-    const themeIcon = document.getElementById('theme-icon');
+    const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
+    const themeIcons = document.querySelectorAll('.theme-toggle-icon');
 
-    // Function to set the theme
     function setTheme(mode) {
         if (mode === 'light') {
             body.classList.add('light-mode');
             localStorage.setItem('theme', 'light');
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
+            themeIcons.forEach(icon => {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            });
         } else {
             body.classList.remove('light-mode');
             localStorage.setItem('theme', 'dark');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
+            themeIcons.forEach(icon => {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            });
         }
     }
 
-    // Initial check on load
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme) {
         setTheme(storedTheme);
     } else {
-        // Default to dark mode if no preference is found
         setTheme('dark'); 
     }
 
-    // Toggle listener
-    themeToggle.addEventListener('click', () => {
-        const currentMode = body.classList.contains('light-mode') ? 'light' : 'dark';
-        setTheme(currentMode === 'dark' ? 'light' : 'dark');
+    themeToggleBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            const currentMode = body.classList.contains('light-mode') ? 'light' : 'dark';
+            setTheme(currentMode === 'dark' ? 'light' : 'dark');
+        });
     });
-
-    // Netlify Form Submission Handler (Prevents default submission and shows success message)
-    const form = document.querySelector('form[name="contact"]');
-    const successMessage = document.getElementById('success-message');
-    
-    // ONLY attach this handler if running in a local/preview environment
-    if (window.location.hostname === 'localhost' || window.location.hostname === '') {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        // Simulate Netlify's successful redirect handling in the local preview
-        form.reset(); 
-        successMessage.classList.remove('hidden');
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => successMessage.classList.add('hidden'), 5000);
-      });
-    }
-
   </script>
 </body>
 </html>
+
