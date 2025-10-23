@@ -1,0 +1,708 @@
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bionic Systems One | AI Systems for Exponential Business Growth</title>
+  <meta name="description" content="AI systems that think, speak, and sell for you. Custom AI CRM, lead scrapers, and AGI-ready solutions built for capital-efficient startup growth." />
+  <style>html{scroll-behavior:smooth}</style>
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ------------------------------------------------------------- */
+    /* DEFAULT THEME: DARK MODE (Deep Indigo & Aqua Gradient) */
+    /* ------------------------------------------------------------- */
+    :root {
+      --bg-color: #060918; /* Very Dark Blue-Black */
+      --text-color: #e0e7ff; /* Light Indigo/Lavender for general text */
+      --primary-color: #4338ca; /* Indigo 700 */
+      --cta-color: #06b6d4; /* Cyan 600 */
+      --card-bg: rgba(255, 255, 255, 0.03); /* Glass base */
+      --card-border: rgba(255, 255, 255, 0.06);
+      --input-bg: rgba(0, 0, 0, 0.5);
+    }
+
+    /* ********* DEFINITIVE FIX: ENSURE TEXT IS LIGHT ON DARK BACKGROUND ********* */
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color); /* Set primary text color for dark mode */
+        position: relative;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    h1, h2, h3, h4, span, a, p {
+        /* This rule helps ensure critical text elements use a light color on load */
+        color: var(--text-color) !important;
+    }
+    /* *************************************************************************** */
+
+
+    /* ------------------------------------------------------------- */
+    /* LIGHT MODE OVERRIDES */
+    /* ------------------------------------------------------------- */
+    body.light-mode {
+      --bg-color: #f8fafc; /* Soft White/Light Gray */
+      --text-color: #0f172a; /* Dark Slate for primary text */
+      --secondary-text: #475569; /* Medium Gray */
+      --card-bg: white;
+      --card-border: #e2e8f0;
+      --input-bg: white;
+      --shadow-color-light: rgba(67, 56, 202, 0.15);
+    }
+    
+    /* FIX: Global Text Overrides for Light Mode (Targeting ALL text colors) */
+    /* This set of rules forces all non-accent text back to dark slate in light mode */
+    body.light-mode h1, 
+    body.light-mode h2, 
+    body.light-mode h3, 
+    body.light-mode h4, 
+    body.light-mode a, 
+    body.light-mode p {
+        color: var(--text-color) !important; /* Force all standard tags to dark */
+    }
+    /* Target common Tailwind utility classes that define light colors */
+    body.light-mode [class*='text-slate-'],
+    body.light-mode .viz-dark-text,
+    body.light-mode .footer-text {
+        color: var(--text-color) !important; /* Force all slates to dark slate */
+    }
+    
+    /* Ensure primary text colors are white/cyan where they should be in LIGHT mode */
+    body.light-mode .text-white { 
+        color: white !important; /* Keep white on buttons/dark areas */
+    }
+    /* FIX: Ensure colors applied to metrics and accents use the correct vibrant color in light mode */
+    body.light-mode .text-cyan-400 {
+        color: var(--cta-color) !important; /* Keep Cyan as the primary accent color */
+    }
+    body.light-mode .text-cyan-200 { /* Metric header text color */
+        color: var(--text-color) !important; 
+    }
+    /* FIX: Ensure general slate colors that are too light are fixed */
+    body.light-mode .text-slate-400,
+    body.light-mode .text-slate-500,
+    body.light-mode .text-slate-300,
+    body.light-mode .text-slate-200 {
+        color: var(--text-color) !important;
+    }
+
+
+    body.light-mode .accent-text {
+        color: transparent !important; /* Keep gradient visible */
+    }
+
+
+    body.light-mode .glass {
+        background: var(--card-bg);
+        backdrop-filter: none;
+        border: 1px solid var(--card-border);
+        box-shadow: 0 4px 12px var(--shadow-color-light);
+    }
+    
+    /* Inverting border colors */
+    body.light-mode .border-white\/5, 
+    body.light-mode .border-white\/10 {
+        border-color: #e2e8f0 !important;
+    }
+    body.light-mode .bg-black\/50 {
+        background-color: white !important;
+        color: var(--text-color);
+    }
+
+    /* ------------------------------------------------------------- */
+    /* SHARED STYLES */
+    /* ------------------------------------------------------------- */
+
+    .accent-text{
+      background: linear-gradient(90deg, var(--cta-color) 10%, #4f46e5 50%, var(--primary-color) 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent !important;
+    }
+    .glass {
+      background: var(--card-bg);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--card-border);
+    }
+    .neon-glow {
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.1), 0 0 25px rgba(67, 56, 202, 0.1) inset;
+    }
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
+    #mobile-menu.active { max-height: 300px; }
+    
+    /* FIX: Ensure icons overlap correctly */
+    .menu-icon-wrapper {
+        position: relative;
+        width: 24px; /* Explicit width for icon container */
+        height: 24px; /* Explicit height for icon container */
+    }
+    .menu-icon-wrapper > i {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.2s;
+    }
+
+    /* BACKGROUND GIMMICK STYLES */
+    #bg-gimmick {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: none;
+        background-image: radial-gradient(circle, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+        background-size: 80px 80px;
+        opacity: 0.2;
+        animation: bg-scroll 600s linear infinite;
+    }
+    @keyframes bg-scroll {
+        from { background-position: 0 0; }
+        to { background-position: 10000px 10000px; }
+    }
+
+    /* Custom styles for Hero AI Visualization */
+    .hero-viz {
+        background: linear-gradient(135deg, var(--primary-color) 0%, rgba(67, 56, 202, 0.5) 40%, rgba(6, 182, 212, 0.2) 100%);
+        box-shadow: 0 0 50px rgba(6, 182, 212, 0.3);
+        border: 1px solid var(--cta-color);
+        transition: transform 0.3s ease-out; 
+    }
+    .hero-viz:hover {
+        transform: perspective(1000px) rotateX(1deg) rotateY(-1deg) scale(1.01); 
+    }
+    body.light-mode .hero-viz {
+        background: white;
+        box-shadow: 0 10px 30px var(--shadow-color-light);
+        border: 1px solid #e2e8f0; 
+    }
+
+    /* CTA Button Shine Gimmick */
+    .cta-button {
+        position: relative;
+        overflow: hidden;
+        z-index: 10;
+        color: white !important;
+    }
+    .cta-button::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 30%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.4);
+        transform: skewX(-20deg);
+        transition: none;
+    }
+    .cta-button:hover::after {
+        animation: shine 0.7s ease-in-out;
+    }
+    @keyframes shine {
+        0% { left: -100%; }
+        100% { left: 150%; }
+    }
+
+    /* Solutions Card Hover Effect */
+    .solution-card:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 10px 20px rgba(6, 182, 212, 0.15);
+        border-color: var(--cta-color);
+    }
+    .solution-card {
+        transition: all 0.3s ease-out;
+    }
+    /* Spinner color for dark background */
+    .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-left-color: var(--primary-color);
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        animation: spin 1s linear infinite;
+    }
+    /* Spinner color override for light mode */
+    body.light-mode .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: var(--primary-color);
+    }
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+  </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="min-h-screen antialiased font-['Inter',sans-serif]">
+
+  <!-- BACKGROUND GIMMICK LAYER -->
+  <div id="bg-gimmick"></div>
+
+  <!-- Header -->
+  <header class="max-w-6xl mx-auto p-6 sticky top-0 bg-[var(--bg-color)]/80 backdrop-blur-sm z-30 border-b border-white/5">
+    <div class="flex items-center justify-between relative">
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-3">
+            <img src="assets/logo.png" alt="Bionic Systems One Logo" class="w-10 h-10 object-contain rounded-full border border-white/10"/>
+            <!-- Brand name visible in mobile view -->
+            <div>
+              <h1 class="text-xl font-extrabold tracking-tight">Bionic Systems One</h1>
+              <div class="text-xs text-slate-400">Next‑Gen AI Systems</div>
+            </div>
+          </a>
+        </div>
+        
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex gap-8 items-center text-sm font-medium">
+          <a href="solutions.html" class="text-cyan-400 transition">Solutions</a>
+          <a href="#clients" class="hover:text-cyan-400 transition">Clients</a>
+          <a href="about.html" class="hover:text-cyan-400 transition">About & Vision</a>
+          <a href="contact.html" class="hover:text-cyan-400 transition">Contact</a>
+          <!-- Toggle Button (DESKTOP) -->
+          <button class="theme-toggle-btn p-2 rounded-full glass hover:bg-white/10 transition border border-white/10">
+              <i class="theme-toggle-icon fas fa-sun text-cyan-400 w-4 h-4"></i>
+          </button>
+          <a href="contact.html" class="ml-2 inline-block px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold text-sm shadow-lg hover:shadow-cyan-400/30 transition-all cta-button">Request a Demo</a>
+        </nav>
+        
+        <!-- Mobile Menu Button - FIXED: Icons are now contained in a wrapper for clean swapping -->
+        <button id="mobileBtn" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 rounded-xl glass hover:bg-white/10 transition border border-white/5">
+            <div class="menu-icon-wrapper">
+                <i id="menuIcon" class="fas fa-bars w-6 h-6"></i>
+                <i id="closeIcon" class="fas fa-times w-6 h-6 hidden"></i>
+            </div>
+        </button>
+    </div>
+    
+    <!-- Mobile Menu Container -->
+    <div id="mobile-menu" class="md:hidden mt-4 glass rounded-xl w-full border border-white/10">
+        <nav class="flex flex-col gap-3 p-4 text-sm font-medium">
+            <a href="solutions.html" class="py-2 border-b border-white/5 text-cyan-400" onclick="closeMobileMenu()">Solutions</a>
+            <a href="#clients" class="py-2 border-b border-white/5 hover:text-cyan-400" onclick="closeMobileMenu()">Clients</a>
+            <a href="about.html" class="py-2 border-b border-white/5 hover:text-cyan-400" onclick="closeMobileMenu()">About & Vision</a>
+            <a href="contact.html" class="py-2 hover:text-cyan-400" onclick="closeMobileMenu()">Contact</a>
+            <a href="contact.html" class="mt-4 text-center px-4 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold" onclick="closeMobileMenu()">Request a Demo</a>
+        </nav>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <main class="relative z-10">
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto px-6 py-10 md:py-24 flex flex-col lg:flex-row items-center gap-12">
+      <!-- Left: Text and CTAs -->
+      <div class="lg:w-3/5">
+        <h2 class="text-4xl md:text-6xl font-extrabold leading-tight">AI Systems That <span class="accent-text">Automate</span>, <span class="accent-text">Convert</span>, and <span class="accent-text">Scale</span>.</h2>
+        <p class="mt-6 text-slate-300 max-w-xl text-lg">Bionic Systems One engineers proprietary AI systems—from Voice Callers to Conversational CRM—to ensure maximum capital efficiency and growth velocity for ambitious startups.</p>
+
+        <div class="mt-10 flex flex-col sm:flex-row gap-4">
+          <a href="contact.html" class="px-8 py-3 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold shadow-xl hover:shadow-cyan-400/40 transition-all text-lg cta-button">Automate My Business Today</a>
+          <a href="solutions.html" class="px-8 py-3 rounded-full border border-white/10 text-slate-200 hover:border-cyan-400/50 transition-colors flex items-center justify-center">Explore Our Systems</a>
+        </div>
+
+        <!-- Velocity Promise (Inspired by competitor analysis) -->
+        <div class="mt-8 flex items-center gap-3 text-sm font-medium text-cyan-400">
+          <i class="fas fa-bolt text-lg"></i>
+          <div>Our Promise: **30-Day Velocity.** Guaranteed systems deployment or proof-of-concept readiness.</div>
+        </div>
+      </div>
+
+      <!-- Right: Abstract AI Visualization -->
+      <div class="lg:w-2/5 w-full mt-10 lg:mt-0">
+        <div class="rounded-3xl hero-viz p-8 neon-glow shadow-2xl border border-cyan-400/20" id="hero-viz-panel">
+          <div class="flex items-center justify-between text-cyan-200 mb-6">
+            <div class="text-sm font-mono viz-dark-text">BS1 Core Metrics</div>
+            <div class="text-xs text-cyan-400">Live Feed</div>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="glass p-4 rounded-xl border border-white/5">
+                <div class="text-sm text-slate-400">Pipeline Velocity (Avg.)</div>
+                <div class="text-3xl font-bold accent-text">4x Faster</div>
+            </div>
+            <div class="glass p-4 rounded-xl border border-white/5">
+                <div class="text-sm text-slate-400">Voice Automation Capacity</div>
+                <div class="text-3xl font-bold text-cyan-400">400+ Calls/Day</div>
+            </div>
+            <div class="glass p-4 rounded-xl border border-white/5">
+                <div class="text-sm text-slate-400">Data Efficiency Score</div>
+                <div class="text-3xl font-bold text-cyan-400">99.8%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GEMINI API INTEGRATION: AI Business Edge Analyzer -->
+    <section class="max-w-4xl mx-auto px-6 py-16">
+        <div class="glass p-8 rounded-3xl border border-indigo-600/30 neon-glow">
+            <h3 class="text-3xl font-bold text-center mb-2">Find Your AI Automation Edge ✨</h3>
+            <p class="text-slate-400 text-center mb-6 max-w-lg mx-auto">Describe your biggest business bottleneck, and our BS1 Logic Core will instantly map a custom solution and estimate the impact.</p>
+            
+            <textarea id="business-problem" rows="4" class="w-full p-4 rounded-xl bg-black/50 border border-white/10 text-slate-200 focus:ring-cyan-400 focus:border-cyan-400" placeholder="E.g., 'We spend 5 hours a day manually checking competitor pricing data and calling unqualified leads in our pipeline.'" maxlength="500"></textarea>
+            
+            <div class="flex justify-between items-center mt-4">
+                <div id="char-count" class="text-sm text-slate-500">500 characters remaining</div>
+                <button id="analyze-button" class="px-6 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold transition-all cta-button flex items-center">
+                    Analyze & Suggest Solution ✨
+                </button>
+            </div>
+
+            <!-- Analysis Output -->
+            <div id="analysis-output" class="hidden mt-8">
+                <h4 class="text-xl font-bold mb-3 accent-text">Recommended AI Strategy:</h4>
+                <div class="space-y-4">
+                    <div id="solution-summary" class="p-4 rounded-xl glass border border-cyan-400/20 text-slate-300"></div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-xl glass border border-indigo-400/20">
+                            <div class="text-sm text-slate-400">Best BSO Module</div>
+                            <div id="module-name" class="text-lg font-bold text-cyan-400"></div>
+                        </div>
+                        <div class="p-4 rounded-xl glass border border-indigo-400/20">
+                            <div class="text-sm text-slate-400">Estimated Value / ROI</div>
+                            <div id="estimated-value" class="text-lg font-bold text-white"></div>
+                        </div>
+                    </div>
+
+                    <a id="contact-cta" href="contact.html" class="block text-center mt-6 px-6 py-3 rounded-full bg-indigo-700 hover:bg-indigo-600 text-white font-semibold transition-colors">
+                        Get a Free Strategy Call
+                    </a>
+                </div>
+            </div>
+
+            <!-- Loading/Error State -->
+            <div id="loading-state" class="hidden mt-8 flex justify-center items-center p-4">
+                <div class="spinner mr-3"></div>
+                <span class="text-cyan-400">Analyzing thousands of workflows...</span>
+            </div>
+            <div id="error-state" class="hidden mt-8 p-4 rounded-xl bg-red-900/50 border border-red-500 text-white">
+                <p>Error: Could not process request. Please try again or ensure your input is clear.</p>
+            </div>
+        </div>
+    </section>
+    <!-- END GEMINI API INTEGRATION -->
+
+    <!-- Short Solutions Overview -->
+    <section class="max-w-6xl mx-auto px-6 py-16">
+        <h3 class="text-3xl font-bold text-center mb-10">AI Modules That Drive Results</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <a href="solutions.html#aicrm" class="p-6 rounded-2xl glass hover:bg-white/5 transition-all flex flex-col items-start border-indigo-600/20 hover:border-cyan-400/30 solution-card">
+                <div class="text-4xl text-cyan-400 mb-3"><i class="fas fa-sitemap"></i></div>
+                <h4 class="font-semibold text-xl">Intelligent CRM</h4>
+                <p class="mt-2 text-slate-300 text-sm">Automated logging, lead scoring, and conversational pipeline management.</p>
+            </a>
+            <a href="solutions.html#aivoice" class="p-6 rounded-2xl glass hover:bg-white/5 transition-all flex flex-col items-start border-indigo-600/20 hover:border-cyan-400/30 solution-card">
+                <div class="text-4xl text-cyan-400 mb-3"><i class="fas fa-comments"></i></div>
+                <h4 class="font-semibold text-xl">Voice Automation</h4>
+                <p class="mt-2 text-slate-300 text-sm">Human-like outbound calling for sales qualification and follow-up.</p>
+            </a>
+            <a href="solutions.html#custom" class="p-6 rounded-2xl glass hover:bg-white/5 transition-all flex flex-col items-start border-indigo-600/20 hover:border-cyan-400/30 solution-card">
+                <div class="text-4xl text-cyan-400 mb-3"><i class="fas fa-code-branch"></i></div>
+                <h4 class="font-semibold text-xl">Custom AI Workflows</h4>
+                <p class="mt-2 text-slate-300 text-sm">Bespoke model training and seamless integration into existing operational systems.</p>
+            </a>
+        </div>
+        <div class="text-center mt-12">
+            <a href="solutions.html" class="inline-block text-cyan-400 hover:text-cyan-300 transition text-md font-semibold border-b border-cyan-400/50 pb-1">View All Six Core Modules <i class="fas fa-arrow-right ml-1"></i></a>
+        </div>
+    </section>
+
+    <!-- Clients and Industries Section -->
+    <section id="clients" class="max-w-6xl mx-auto px-6 py-16 md:py-20 border-t border-white/5">
+        <h3 class="text-3xl font-bold text-center mb-12">Engineered for High-Value Sectors</h3>
+        
+        <!-- Placeholder Industry Logos -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 justify-items-center mb-6">
+            <div class="w-full h-16 glass rounded-lg flex items-center justify-center text-slate-400 font-mono text-sm border-white/10">FinTech Alpha</div>
+            <div class="w-full h-16 glass rounded-lg flex items-center justify-center text-slate-400 font-mono text-sm border-white/10">Global Pharma</div>
+            <div class="w-full h-16 glass rounded-lg flex items-center justify-center text-slate-400 font-mono text-sm border-white/10">Logistics Corp</div>
+            <div class="w-full h-16 glass rounded-lg flex items-center justify-center text-slate-400 font-mono text-sm border-white/10">eCommerce Pro</div>
+            <div class="w-full h-16 glass rounded-lg flex items-center justify-center text-slate-400 font-mono text-sm border-white/10">EduTech Lab</div>
+            <div class="w-full h-16 glass rounded-lg flex items-center justify-center text-slate-400 font-mono text-sm border-white/10">SaaS Catalyst</div>
+        </div>
+        
+        <p class="text-slate-400 text-center max-w-2xl mx-auto">These logos represent the high-stakes, data-intensive industries we are purpose-built to serve, ensuring maximum security and capital efficiency.</p>
+        
+        <div class="text-center mt-8">
+            <a href="contact.html" class="inline-block text-cyan-400 hover:text-cyan-300 transition text-md font-semibold border-b border-cyan-400/50 pb-1">Future-Proof My Sector <i class="fas fa-arrow-right ml-1"></i></a>
+        </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t border-white/6 py-10">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div class="col-span-2 md:col-span-2">
+            <a href="index.html" class="flex items-center gap-3 mb-4">
+                <img src="assets/logo.png" alt="Bionic Systems One Logo" class="w-10 h-10 object-contain"/>
+                <span class="text-xl font-extrabold tracking-tight">Bionic Systems One</span>
+            </a>
+            <p class="text-sm text-slate-400 max-w-xs footer-text">Building the intelligent foundation for tomorrow's business and beyond. Specializing in capital-efficient AI automation.</p>
+        </div>
+        
+        <!-- Quick Links -->
+        <div>
+            <h4 class="font-semibold text-cyan-400 mb-3">Quick Links</h4>
+            <ul class="space-y-2 text-sm text-slate-400">
+                <li><a href="solutions.html" class="hover:text-cyan-400 transition">Our Solutions</a></li>
+                <li><a href="#clients" class="hover:text-cyan-400 transition">Clients</a></li>
+                <li><a href="about.html" class="hover:text-cyan-400 transition">About & Vision</a></li>
+                <li><a href="contact.html" class="hover:text-cyan-400 transition">Request Demo</a></li>
+            </ul>
+        </div>
+        
+        <!-- Legal -->
+        <div>
+            <h4 class="font-semibold text-cyan-400 mb-3">Legal</h4>
+            <ul class="space-y-2 text-sm text-slate-400">
+                <li><a href="privacy.html" class="hover:text-cyan-400 transition">Privacy Policy</a></li>
+                <li><a href="terms.html" class="hover:text-cyan-400 transition">Terms of Service</a></li>
+            </ul>
+        </div>
+
+        <!-- Social & Theme Toggle (Mobile Friendly) -->
+        <div>
+            <h4 class="font-semibold text-cyan-400 mb-3">Connect</h4>
+            <div class="flex space-x-4 text-xl">
+                <a href="https://instagram.com/bionicsystemsone" target="_blank" aria-label="Instagram" class="hover:text-cyan-400 transition"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/bionicsysone" target="_blank" aria-label="Twitter/X" class="hover:text-cyan-400 transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Facebook" class="hover:text-cyan-400 transition"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            
+            <!-- NEW THEME TOGGLE FOR MOBILE ACCESSIBILITY -->
+            <button class="theme-toggle-btn mt-4 px-4 py-2 rounded-full glass border border-white/10 text-sm flex items-center gap-2 hover:bg-white/10 transition">
+                <i class="theme-toggle-icon fas fa-sun text-cyan-400 w-4 h-4"></i>
+                <span class="viz-dark-text">Toggle Theme</span>
+            </button>
+            
+            <p class="text-xs text-slate-600 mt-4 footer-text">Built with ❤️ and Netlify</p>
+        </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 mt-10 text-center text-sm text-slate-500 footer-text">
+        © <span id="year-footer"></span> Bionic Systems One. All rights reserved.
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <script>
+    document.getElementById('year-footer').textContent = new Date().getFullYear();
+
+    // --- SHARED UTILITY FUNCTIONS ---
+    
+    // Exponential Backoff for API Retries
+    async function fetchWithBackoff(url, options, maxRetries = 3) {
+      for (let attempt = 0; attempt < maxRetries; attempt++) {
+        try {
+          const response = await fetch(url, options);
+          if (response.ok) {
+            return response;
+          }
+          if (response.status === 429 && attempt < maxRetries - 1) {
+            const delay = Math.pow(2, attempt) * 1000 + Math.random() * 1000;
+            await new Promise(resolve => setTimeout(resolve, delay));
+            continue;
+          }
+          throw new Error(`API request failed with status: ${response.status}`);
+        } catch (error) {
+          if (attempt === maxRetries - 1) throw error;
+        }
+      }
+    }
+
+    // --- GEMINI API CORE FUNCTION ---
+    
+    const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=";
+    const apiKey = ""; // Canvas will provide this automatically.
+
+    const solutionSchema = {
+      type: "OBJECT",
+      properties: {
+        suggestedSolution: { "type": "STRING", "description": "The specific AI solution (e.g., Lead Scraping & Voice Automation) to solve the problem." },
+        recommendedBS1Module: { "type": "STRING", "description": "The name of the core BSO module (e.g., Lead Scraper, AI CRM, Custom AI Workflows) that best fits." },
+        estimatedValue: { "type": "STRING", "description": "A concise, high-impact estimate of the value (e.g., '30% increase in pipeline speed' or '$15,000/month saved')." },
+        summary: { "type": "STRING", "description": "A brief, compelling summary (2-3 sentences max) explaining HOW the solution works for the user's specific problem." }
+      },
+      "propertyOrdering": ["suggestedSolution", "recommendedBS1Module", "estimatedValue", "summary"]
+    };
+
+    const systemInstruction = "Act as a Bionic Systems One Solutions Architect. You are an expert in capital-efficient AI automation. Based on the user's business problem, suggest the most effective AI automation strategy using our modules (AI CRM, Lead Scraper, AI Phone Caller, AI Assistant, Custom AI Workflows, AI Workflows). Provide a concise summary and estimate the value. Your output MUST be valid JSON matching the provided schema. Do not use Markdown outside of the JSON block.";
+
+    async function analyzeBusinessNeed() {
+      const problemTextarea = document.getElementById('business-problem');
+      const problem = problemTextarea.value.trim();
+      
+      const analyzeButton = document.getElementById('analyze-button');
+      const loadingState = document.getElementById('loading-state');
+      const errorState = document.getElementById('error-state');
+      const analysisOutput = document.getElementById('analysis-output');
+      
+      if (problem.length < 20) {
+        alert('Please describe your business problem in more detail (min 20 characters).');
+        return;
+      }
+      
+      // UI State: Loading
+      errorState.classList.add('hidden');
+      analysisOutput.classList.add('hidden');
+      loadingState.classList.remove('hidden');
+      analyzeButton.disabled = true;
+      analyzeButton.innerHTML = '<div class="spinner mr-3"></div> Analyzing...';
+
+      try {
+        const payload = {
+          contents: [{ parts: [{ text: `Analyze this business problem and provide a solution using Bionic Systems One's modules: "${problem}"` }] }],
+          systemInstruction: { parts: [{ text: systemInstruction }] },
+          generationConfig: {
+            responseMimeType: "application/json",
+            responseSchema: solutionSchema
+          }
+        };
+
+        const response = await fetchWithBackoff(API_URL + apiKey, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (!jsonText) {
+          throw new Error("No valid JSON content received from API.");
+        }
+
+        const data = JSON.parse(jsonText);
+
+        // UI State: Success
+        document.getElementById('solution-summary').textContent = data.summary;
+        document.getElementById('module-name').textContent = data.recommendedBS1Module;
+        document.getElementById('estimated-value').textContent = data.estimatedValue;
+        
+        analysisOutput.classList.remove('hidden');
+
+      } catch (e) {
+        console.error("Gemini API Error:", e);
+        errorState.classList.remove('hidden');
+      } finally {
+        // UI State: Reset
+        loadingState.classList.add('hidden');
+        analyzeButton.disabled = false;
+        analyzeButton.innerHTML = 'Analyze & Suggest Solution ✨';
+      }
+    }
+
+    // --- EVENT LISTENERS AND UTILITIES ---
+    
+    document.getElementById('analyze-button').addEventListener('click', analyzeBusinessNeed);
+
+    // Character Counter Logic
+    const problemTextarea = document.getElementById('business-problem');
+    const charCountDisplay = document.getElementById('char-count');
+    const MAX_CHARS = 500;
+
+    problemTextarea.addEventListener('input', () => {
+        const currentLength = problemTextarea.value.length;
+        const remaining = MAX_CHARS - currentLength;
+        charCountDisplay.textContent = `${remaining} characters remaining`;
+        
+        if (remaining < 50) {
+            charCountDisplay.classList.add('text-red-400');
+        } else {
+            charCountDisplay.classList.remove('text-red-400');
+        }
+    });
+
+
+    // Mobile Menu Logic (Shared across all pages)
+    const mobileBtn = document.getElementById('mobileBtn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menuIcon');
+    const closeIcon = document.getElementById('closeIcon');
+
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('active');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+        // FIXED: Only show menu icon when closing
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+    }
+
+    mobileBtn.addEventListener('click', () => {
+      const isExpanded = mobileMenu.classList.toggle('active');
+      mobileBtn.setAttribute('aria-expanded', isExpanded);
+      // FIXED: Correctly toggle icons based on state
+      menuIcon.classList.toggle('hidden', isExpanded);
+      closeIcon.classList.toggle('hidden', !isExpanded);
+    });
+
+    // Theme Toggle Logic (Shared across all pages)
+    const body = document.body;
+    const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
+    const themeIcons = document.querySelectorAll('.theme-toggle-icon');
+
+    // Function to set the theme
+    function setTheme(mode) {
+        if (mode === 'light') {
+            body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light');
+            themeIcons.forEach(icon => {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            });
+        } else {
+            body.classList.remove('light-mode');
+            localStorage.setItem('theme', 'dark');
+            themeIcons.forEach(icon => {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            });
+        }
+    }
+
+    // Initial check on load
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+        setTheme(storedTheme);
+    } else {
+        // Default to dark mode if no preference is found
+        setTheme('dark'); 
+    }
+
+    // Toggle listeners (Attach to all buttons)
+    themeToggleBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            const currentMode = body.classList.contains('light-mode') ? 'light' : 'dark';
+            setTheme(currentMode === 'dark' ? 'light' : 'dark');
+        });
+    });
+
+
+    // Parallax/3D Hover on Hero Viz Panel
+    const heroVizPanel = document.getElementById('hero-viz-panel');
+    const handleMouseMove = (e) => {
+        const { offsetWidth: width, offsetHeight: height } = heroVizPanel;
+        const { offsetX: x, offsetY: y } = e;
+        
+        // Calculate rotation based on mouse position relative to center of element
+        const xRotate = (y / height - 0.5) * -4; // Max -4deg to +4deg
+        const yRotate = (x / width - 0.5) * 4;   // Max -4deg to +4deg
+
+        heroVizPanel.style.transform = `perspective(1000px) rotateX(${xRotate}deg) rotateY(${yRotate}deg) scale(1.01)`;
+    };
+    
+    // Reset transform when mouse leaves
+    const handleMouseLeave = () => {
+        heroVizPanel.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+    };
+
+    if (heroVizPanel) {
+        // Only apply 3D effect on desktop devices
+        if (window.innerWidth >= 768) {
+            heroVizPanel.addEventListener('mousemove', handleMouseMove);
+            heroVizPanel.addEventListener('mouseleave', handleMouseLeave);
+        }
+    }
+  </script>
+</body>
+</html>

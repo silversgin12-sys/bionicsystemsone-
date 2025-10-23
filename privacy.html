@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy | Bionic Systems One</title>
+  <meta name="description" content="Official Privacy Policy for Bionic Systems One. Details on data collection, usage, and user rights." />
+  <style>html{scroll-behavior:smooth}</style>
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ------------------------------------------------------------- */
+    /* DEFAULT THEME: DARK MODE (Deep Indigo & Aqua Gradient) */
+    /* ------------------------------------------------------------- */
+    :root{
+      --bg-color: #060918; /* Very Dark Blue-Black */
+      --text-color: #e0e7ff; /* Light Indigo/Lavender */
+      --secondary-text: #a5b4fc; /* Light Purple for detail */
+      --primary-color: #4338ca; /* Indigo 700 */
+      --cta-color: #06b6d4; /* Cyan 600 */
+      --card-bg: rgba(255, 255, 255, 0.03); /* Glass base */
+      --card-border: rgba(255, 255, 255, 0.06);
+      --input-bg: rgba(0, 0, 0, 0.5);
+    }
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        position: relative;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* ------------------------------------------------------------- */
+    /* LIGHT MODE OVERRIDES */
+    /* ------------------------------------------------------------- */
+    body.light-mode {
+      --bg-color: #f8fafc; /* Soft White/Light Gray */
+      --text-color: #0f172a; /* Dark Slate for primary text */
+      --secondary-text: #475569; /* Medium Gray */
+      --card-bg: white;
+      --card-border: #e2e8f0;
+      --input-bg: white;
+      --shadow-color-light: rgba(67, 56, 202, 0.15);
+    }
+    
+    body.light-mode .glass {
+        background: var(--card-bg);
+        backdrop-filter: none;
+        border: 1px solid var(--card-border);
+        box-shadow: 0 4px 12px var(--shadow-color-light);
+    }
+    
+    /* Inverting specific elements for light mode */
+    body.light-mode .text-slate-200, 
+    body.light-mode .text-slate-300, 
+    body.light-mode .text-slate-400 { 
+        color: var(--text-color) !important; 
+    }
+    body.light-mode .text-white { 
+        color: white !important; 
+    }
+    body.light-mode header {
+        border-bottom-color: #e2e8f0;
+    }
+    body.light-mode .border-white\/5, 
+    body.light-mode .border-white\/10 {
+        border-color: #e2e8f0 !important;
+    }
+    body.light-mode .bg-black\/50 {
+        background-color: white !important;
+        color: var(--text-color);
+    }
+
+    /* ------------------------------------------------------------- */
+    /* SHARED STYLES */
+    /* ------------------------------------------------------------- */
+
+    .accent-text{
+      background: linear-gradient(90deg, var(--cta-color) 10%, #4f46e5 50%, var(--primary-color) 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .glass {
+      background: var(--card-bg);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--card-border);
+    }
+    .neon-glow{
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.1), 0 0 25px rgba(67, 56, 202, 0.1) inset;
+    }
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
+    #mobile-menu.active { max-height: 300px; }
+    /* Override Tailwind's default text colors */
+    .text-slate-200 { color: var(--accent-color); }
+    .text-slate-300 { color: #c7d2fe; }
+    .text-slate-400 { color: #a5b4fc; }
+
+  </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="min-h-screen antialiased font-['Inter',sans-serif]">
+
+  <!-- Header -->
+  <header class="max-w-6xl mx-auto p-6 sticky top-0 bg-[var(--bg-color)]/80 backdrop-blur-sm z-30 border-b border-white/5">
+    <div class="flex items-center justify-between relative">
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-3">
+            <img src="assets/logo.png" alt="Bionic Systems One Logo" class="w-10 h-10 object-contain rounded-full border border-white/10"/>
+            <div class="hidden sm:block">
+              <h1 class="text-xl font-extrabold tracking-tight">Bionic Systems One</h1>
+              <div class="text-xs text-slate-400">Next‑Gen AI Systems</div>
+            </div>
+          </a>
+        </div>
+        
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex gap-8 items-center text-sm font-medium">
+          <a href="solutions.html" class="hover:text-cyan-400 transition">Solutions</a>
+          <a href="index.html#clients" class="hover:text-cyan-400 transition">Clients</a>
+          <a href="about.html" class="hover:text-cyan-400 transition">About & Vision</a>
+          <a href="contact.html" class="hover:text-cyan-400 transition">Contact</a>
+          <!-- Toggle Button -->
+          <button id="theme-toggle" class="p-2 rounded-full glass hover:bg-white/10 transition border border-white/10">
+              <i id="theme-icon" class="fas fa-sun text-cyan-400 w-4 h-4"></i>
+          </button>
+          <a href="contact.html" class="ml-2 inline-block px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold text-sm shadow-lg hover:shadow-cyan-400/30 transition-all">Request a Demo</a>
+        </nav>
+        
+        <!-- Mobile Menu Button -->
+        <button id="mobileBtn" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 rounded-xl glass hover:bg-white/10 transition border border-white/5">
+            <svg id="menuIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            <svg id="closeIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+    </div>
+    
+    <!-- Mobile Menu Container -->
+    <div id="mobile-menu" class="md:hidden mt-4 glass rounded-xl w-full border border-white/10">
+        <nav class="flex flex-col gap-3 p-4 text-sm font-medium">
+            <a href="solutions.html" class="py-2 border-b border-white/5 hover:text-cyan-400" onclick="closeMobileMenu()">Solutions</a>
+            <a href="index.html#clients" class="py-2 border-b border-white/5 hover:text-cyan-400" onclick="closeMobileMenu()">Clients</a>
+            <a href="about.html" class="py-2 border-b border-white/5 hover:text-cyan-400" onclick="closeMobileMenu()">About & Vision</a>
+            <a href="contact.html" class="py-2 hover:text-cyan-400" onclick="closeMobileMenu()">Contact</a>
+            <a href="contact.html" class="mt-4 text-center px-4 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold" onclick="closeMobileMenu()">Request a Demo</a>
+        </nav>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <main>
+    <section class="max-w-4xl mx-auto px-6 py-12 md:py-20">
+      <h2 class="text-4xl md:text-5xl font-extrabold leading-tight text-center mb-8">Privacy Policy</h2>
+      <div class="glass p-8 rounded-3xl border border-indigo-600/30 neon-glow space-y-6 text-slate-300">
+        
+        <p class="text-xs text-slate-400 text-right">Last Updated: <span id="policy-date"></span></p>
+
+        <h3 class="text-2xl font-bold text-cyan-400">1. Information We Collect</h3>
+        <p>We collect information you voluntarily provide to us when you fill out forms on our website (e.g., the Contact or Demo Request form). This information may include your name, email address, company name, and your specific project description.</p>
+
+        <h3 class="text-2xl font-bold text-cyan-400">2. How We Use Your Information</h3>
+        <p>We use the information we collect to communicate with you, process your requests for demonstrations or partnership calls, and improve our services. We do not sell or rent your personal information to third parties.</p>
+
+        <h3 class="text-2xl font-bold text-cyan-400">3. Data Security</h3>
+        <p>We implement a variety of security measures, including data encryption and secure server practices, to maintain the safety of your personal information. Our systems are designed to comply with industry standards for protecting proprietary and client data.</p>
+
+        <h3 class="text-2xl font-bold text-cyan-400">4. Third-Party Services (Netlify & Gemini)</h3>
+        <p>This website is hosted on Netlify, which automatically processes form submissions. Our AI analysis features are powered by the Gemini API, which processes input queries to provide generalized recommendations. User input to the analyzer is non-personal and treated securely.</p>
+        
+        <h3 class="text-2xl font-bold text-cyan-400">5. Cookies and Tracking</h3>
+        <p>We use local browser storage to save your preference for the light/dark theme. We use standard, non-invasive analytics (if implemented) to track general site usage for improvement purposes only.</p>
+
+        <h3 class="text-2xl font-bold text-cyan-400">6. Your Rights</h3>
+        <p>You have the right to request access to the personal data we hold about you and request that we delete your information. To exercise these rights, please contact us via the email provided on our Contact page.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t border-white/6 py-10">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div class="col-span-2 md:col-span-2">
+            <a href="index.html" class="flex items-center gap-3 mb-4">
+                <img src="assets/logo.png" alt="Bionic Systems One Logo" class="w-10 h-10 object-contain"/>
+                <span class="text-xl font-extrabold tracking-tight">Bionic Systems One</span>
+            </a>
+            <p class="text-sm text-slate-400 max-w-xs">Building the intelligent foundation for tomorrow's business and beyond. Specializing in capital-efficient AI automation.</p>
+        </div>
+        
+        <!-- Quick Links -->
+        <div>
+            <h4 class="font-semibold text-white mb-3">Quick Links</h4>
+            <ul class="space-y-2 text-sm text-slate-400">
+                <li><a href="solutions.html" class="hover:text-cyan-400 transition">Our Solutions</a></li>
+                <li><a href="index.html#clients" class="hover:text-cyan-400 transition">Clients</a></li>
+                <li><a href="about.html" class="hover:text-cyan-400 transition">About & Vision</a></li>
+                <li><a href="contact.html" class="hover:text-cyan-400 transition">Request Demo</a></li>
+            </ul>
+        </div>
+        
+        <!-- Legal -->
+        <div>
+            <h4 class="font-semibold text-white mb-3">Legal</h4>
+            <ul class="space-y-2 text-sm text-slate-400">
+                <li><a href="privacy.html" class="text-cyan-400 transition">Privacy Policy</a></li>
+                <li><a href="terms.html" class="hover:text-cyan-400 transition">Terms of Service</a></li>
+            </ul>
+        </div>
+
+        <!-- Social -->
+        <div>
+            <h4 class="font-semibold text-white mb-3">Connect</h4>
+            <div class="flex space-x-4 text-xl">
+                <a href="https://instagram.com/bionicsystemsone" target="_blank" aria-label="Instagram" class="hover:text-cyan-400 transition"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/bionicsysone" target="_blank" aria-label="Twitter/X" class="hover:text-cyan-400 transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Facebook" class="hover:text-cyan-400 transition"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <p class="text-xs text-slate-600 mt-4">Built with ❤️ and Netlify</p>
+        </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 mt-10 text-center text-sm text-slate-500">
+        © <span id="year-footer-privacy"></span> Bionic Systems One. All rights reserved.
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <script>
+    document.getElementById('year-footer-privacy').textContent = new Date().getFullYear();
+    document.getElementById('policy-date').textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    
+    // Mobile Menu Logic (Shared across all pages)
+    const mobileBtn = document.getElementById('mobileBtn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menuIcon');
+    const closeIcon = document.getElementById('closeIcon');
+
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('active');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+    }
+
+    mobileBtn.addEventListener('click', () => {
+      const isExpanded = mobileMenu.classList.toggle('active');
+      mobileBtn.setAttribute('aria-expanded', isExpanded);
+      menuIcon.classList.toggle('hidden', isExpanded);
+      closeIcon.classList.toggle('hidden', !isExpanded);
+    });
+
+    // Theme Toggle Logic (Shared across all pages)
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const themeIcon = document.getElementById('theme-icon');
+
+    // Function to set the theme
+    function setTheme(mode) {
+        if (mode === 'light') {
+            body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        } else {
+            body.classList.remove('light-mode');
+            localStorage.setItem('theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+    }
+
+    // Initial check on load
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+        setTheme(storedTheme);
+    } else {
+        // Default to dark mode if no preference is found
+        setTheme('dark'); 
+    }
+
+    // Toggle listener
+    themeToggle.addEventListener('click', () => {
+        const currentMode = body.classList.contains('light-mode') ? 'light' : 'dark';
+        setTheme(currentMode === 'dark' ? 'light' : 'dark');
+    });
+
+  </script>
+</body>
+</html>

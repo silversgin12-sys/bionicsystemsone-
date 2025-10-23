@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Solutions | Bionic Systems One - Core AI Automation Modules</title>
+  <meta name="description" content="Explore our six core AI automation modules: AI CRM, Lead Scraper, Voice Caller, AI Assistant, and Custom AI Workflows. Engineered for capital-efficient scaling." />
+  <style>html{scroll-behavior:smooth}</style>
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ------------------------------------------------------------- */
+    /* DEFAULT THEME: DARK MODE (Deep Indigo & Aqua Gradient) */
+    /* ------------------------------------------------------------- */
+    :root{
+      --bg-color: #060918; /* Very Dark Blue-Black */
+      --text-color: #e0e7ff; /* Light Indigo/Lavender */
+      --secondary-text: #a5b4fc; /* Light Purple for detail */
+      --primary-color: #4338ca; /* Indigo 700 */
+      --cta-color: #06b6d4; /* Cyan 600 */
+      --card-bg: rgba(255, 255, 255, 0.03); /* Glass base */
+      --card-border: rgba(255, 255, 255, 0.06);
+      --input-bg: rgba(0, 0, 0, 0.5);
+    }
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        position: relative;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* ------------------------------------------------------------- */
+    /* LIGHT MODE OVERRIDES */
+    /* ------------------------------------------------------------- */
+    body.light-mode {
+      --bg-color: #f8fafc; /* Soft White/Light Gray */
+      --text-color: #0f172a; /* Dark Slate for primary text */
+      --secondary-text: #475569; /* Medium Gray */
+      --card-bg: white;
+      --card-border: #e2e8f0;
+      --input-bg: white;
+      --shadow-color-light: rgba(67, 56, 202, 0.15);
+    }
+    
+    body.light-mode .glass {
+        background: var(--card-bg);
+        backdrop-filter: none;
+        border: 1px solid var(--card-border);
+        box-shadow: 0 4px 12px var(--shadow-color-light);
+    }
+    
+    /* Inverting specific elements for light mode */
+    body.light-mode .text-slate-200, 
+    body.light-mode .text-slate-300, 
+    body.light-mode .text-slate-400 { 
+        color: var(--text-color) !important; 
+    }
+    body.light-mode .text-white { 
+        color: white !important; 
+    }
+    body.light-mode header {
+        border-bottom-color: #e2e8f0;
+    }
+    body.light-mode .border-white\/5, 
+    body.light-mode .border-white\/10 {
+        border-color: #e2e8f0 !important;
+    }
+    body.light-mode .bg-black\/50 {
+        background-color: white !important;
+        color: var(--text-color);
+    }
+    body.light-mode #hyron-cube span {
+        color: var(--text-color); /* Hyron text becomes black/dark slate */
+        text-shadow: none; /* Remove glow on Hyron text */
+    }
+
+    /* ------------------------------------------------------------- */
+    /* SHARED STYLES */
+    /* ------------------------------------------------------------- */
+
+    .accent-text{
+      background: linear-gradient(90deg, var(--cta-color) 10%, #4f46e5 50%, var(--primary-color) 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .glass {
+      background: var(--card-bg);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--card-border);
+    }
+    .neon-glow{
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.1), 0 0 25px rgba(67, 56, 202, 0.1) inset;
+    }
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
+    #mobile-menu.active { max-height: 300px; }
+    /* Override Tailwind's default text colors */
+    .text-slate-200 { color: var(--accent-color); }
+    .text-slate-300 { color: #c7d2fe; }
+    .text-slate-400 { color: #a5b4fc; }
+
+    /* --- HYRON GIMMICK STYLES (V1 Clean Base - Fixed) --- */
+    
+    :root {
+      --hyron-glow: var(--cta-color); 
+      --chip-size: 200px;
+      --internal-dot-color: rgba(255, 255, 255, 0.8);
+      --circuit-opacity: 0.3;
+    }
+
+    /* Outer Container for 3D Tilt and Animation */
+    #ai-chip {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 4rem auto;
+        /* Perspective for 3D effect */
+        transform: perspective(1000px) rotateX(10deg) rotateZ(-10deg);
+        transition: transform 0.5s;
+        cursor: pointer;
+        /* Breathing animation for the entire area */
+        animation: core-pulse 3s infinite alternate ease-in-out;
+    }
+
+    /* Breathing Animation Keyframes */
+    @keyframes core-pulse {
+        0% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.2); filter: brightness(1); }
+        50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.5); filter: brightness(1.2); }
+        100% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.2); filter: brightness(1); }
+    }
+
+    /* Motherboard Circuitry Background (Simple Geometric Traces) */
+    #ai-chip::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 1.5rem;
+        background-color: transparent;
+        z-index: 1;
+        
+        /* --- Simple Geometric Circuitry --- */
+        background-image:
+            /* Main structural lines (Indigo/Purple for depth) */
+            linear-gradient(to right, rgba(67, 56, 202, 0.5) 2px, transparent 2px),
+            linear-gradient(to bottom, rgba(67, 56, 202, 0.5) 2px, transparent 2px),
+            /* Fine glowing trace lines (Cyan for active data) */
+            linear-gradient(to right, var(--hyron-glow) 0.5px, transparent 0.5px),
+            linear-gradient(to bottom, var(--hyron-glow) 0.5px, transparent 0.5px);
+            
+        background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+        background-position: 0 0;
+        
+        box-shadow: 0 0 15px var(--hyron-glow) inset; /* Increased inset glow */
+        opacity: var(--circuit-opacity);
+        transform: translateZ(-20px); /* Pushes the grid into the background for 3D depth */
+    }
+
+    /* Central Translucent Cube (V1 - Simple Core) */
+    #hyron-cube {
+        width: var(--chip-size); 
+        height: var(--chip-size); 
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        
+        background: rgba(67, 56, 202, 0.6); /* Translucent indigo base */
+        border: 4px solid var(--hyron-glow);
+        
+        /* --- VISIBLE INTERNAL ARCHITECTURE (Dots) --- */
+        box-shadow: 
+            0 0 20px var(--hyron-glow), /* External glow */
+            inset 0 0 10px rgba(255, 255, 255, 0.5), /* Internal highlight */
+            inset 0 0 0 40px var(--internal-dot-color), /* Central processing unit */
+            inset 20px 20px 0 10px var(--internal-dot-color), 
+            inset -20px -20px 0 10px var(--internal-dot-color); /* Corner dots */
+        
+        opacity: 0.8; /* Slight reduction for better visibility of background traces */
+        z-index: 5;
+        transform: translateZ(20px); /* Lifts the cube forward in 3D space */
+        transition: all 0.5s; 
+    }
+    
+    #hyron-cube span {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: white;
+        text-shadow: 0 0 10px var(--hyron-glow);
+        letter-spacing: 3px;
+    }
+    
+    /* Animation for the meter bar */
+    @keyframes meter-fill {
+        0% { width: 0; }
+        100% { width: 0.01%; } /* Target 0.01% completion */
+    }
+    #agi-meter-bar {
+        animation: meter-fill 3s ease-out forwards;
+        background-color: var(--hyron-glow) !important; 
+    }
+
+    /* Solution Card Hover Effect */
+    .solution-card:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 10px 20px rgba(6, 182, 212, 0.15);
+        border-color: var(--hyron-glow);
+    }
+    .solution-card {
+        transition: all 0.3s ease-out;
+    }
+    /* Shake animation for status box */
+    @keyframes shake-once {
+        0% { transform: translateX(0); }
+        20% { transform: translateX(-5px); }
+        40% { transform: translateX(5px); }
+        60% { transform: translateX(-3px); }
+        80% { transform: translateX(3px); }
+        100% { transform: translateX(0); }
+    }
+    .shake-once {
+        animation: shake-once 0.5s ease-out;
+    }
+  </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="min-h-screen antialiased font-['Inter',sans-serif]">
+
+  <!-- Header -->
+  <header class="max-w-6xl mx-auto p-6 sticky top-0 bg-[var(--bg-color)]/80 backdrop-blur-sm z-30 border-b border-white/5">
+    <div class="flex items-center justify-between relative">
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-3">
+            <img src="assets/logo.png" alt="Bionic Systems One Logo" class="w-10 h-10 object-contain rounded-full border border-white/10"/>
+            <div class="hidden sm:block">
+              <h1 class="text-xl font-extrabold tracking-tight">Bionic Systems One</h1>
+              <div class="text-xs text-slate-400">Next‑Gen AI Systems</div>
+            </div>
+          </a>
+        </div>
+        
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex gap-8 items-center text-sm font-medium">
+          <a href="solutions.html" class="text-cyan-400 transition">Solutions</a>
+          <a href="index.html#clients" class="hover:text-cyan-400 transition">Clients</a> 
+          <a href="about.html" class="hover:text-cyan-400 transition">About & Vision</a>
+          <a href="contact.html" class="hover:text-cyan-400 transition">Contact</a>
+          <!-- Toggle Button -->
+          <button id="theme-toggle" class="p-2 rounded-full glass hover:bg-white/10 transition border border-white/10">
+              <i id="theme-icon" class="fas fa-sun text-cyan-400 w-4 h-4"></i>
+          </button>
+          <a href="contact.html" class="ml-2 inline-block px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold text-sm shadow-lg hover:shadow-cyan-400/30 transition-all">Request a Demo</a>
+        </nav>
+        
+        <!-- Mobile Menu Button -->
+        <button id="mobileBtn" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 rounded-xl glass hover:bg-white/10 transition border border-white/5">
+            <svg id="menuIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            <svg id="closeIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+    </div>
+    
+    <!-- Mobile Menu Container -->
+    <div id="mobile-menu" class="md:hidden mt-4 glass rounded-xl w-full border border-white/10">
+        <nav class="flex flex-col gap-3 p-4 text-sm font-medium">
+            <a href="solutions.html" class="py-2 border-b border-white/5 text-cyan-400" onclick="closeMobileMenu()">Solutions</a>
+            <a href="index.html#clients" class="py-2 border-b border-white/5 hover:text-cyan-400" onclick="closeMobileMenu()">Clients</a>
+            <a href="about.html" class="py-2 border-b border-white/5 hover:text-cyan-400" onclick="closeMobileMenu()">About & Vision</a>
+            <a href="contact.html" class="py-2 hover:text-cyan-400" onclick="closeMobileMenu()">Contact</a>
+            <a href="contact.html" class="mt-4 text-center px-4 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold" onclick="closeMobileMenu()">Request a Demo</a>
+        </nav>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <main class="relative z-10">
+    <!-- Solutions Hero -->
+    <section class="max-w-5xl mx-auto px-6 py-12 md:py-20 text-center">
+        <span class="text-sm font-semibold uppercase tracking-widest text-cyan-400">Our Technology Stack</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold leading-tight mt-4">Proprietary AI Modules for <span class="accent-text">Unmatched Velocity</span>.</h2>
+        <p class="mt-4 text-slate-300 max-w-2xl mx-auto text-center text-lg">Every Bionic Systems One solution is built from our integrated suite of purpose-built AI modules, designed to plug directly into your capital-efficiency goals.</p>
+    </section>
+
+    <!-- Interactive Hyron Gimmick (V1 Clean Base - Fixed) -->
+    <section class="max-w-6xl mx-auto px-6 py-10 md:py-16">
+        <div class="text-center mb-10">
+            <h3 class="text-2xl font-bold mb-2">Project Hyron: AGI Kernel (R&D)</h3>
+            <p class="text-sm text-slate-400">Interact with the core. This proprietary system is currently 0.01% complete and represents our long-term AGI/ASI research mandate.</p>
+        </div>
+        
+        <div id="ai-chip-container" class="flex flex-col items-center">
+            
+            <!-- Hyron Chip Visual -->
+            <div id="ai-chip" class="group">
+                <!-- V1 Clean Base - Simple Floating 3D Cube -->
+                <div id="hyron-cube">
+                    <span class="text-3xl font-bold text-white tracking-widest">HYRON</span>
+                </div>
+            </div>
+
+            <!-- Interaction & Status Panel -->
+            <div class="mt-8 p-6 glass rounded-xl w-full max-w-sm border border-white/10 text-sm">
+                <div id="status-message" class="font-mono text-cyan-400 mb-4 transition-all duration-300">
+                    STATUS: Awaiting initialization signal...
+                </div>
+                
+                <button id="ping-button" class="w-full px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 transition text-white font-semibold flex items-center justify-center">
+                    <i class="fas fa-satellite-dish mr-2"></i> PING RESEARCH CORE
+                </button>
+
+                <div class="mt-4">
+                    <div class="flex justify-between mb-1 text-slate-400">
+                        <span>Project Completion:</span>
+                        <span id="meter-percent" class="text-cyan-400 font-semibold">0.01%</span>
+                    </div>
+                    <div id="agi-meter" class="w-full">
+                        <div id="agi-meter-bar" style="width: 0.01%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Grid -->
+    <section id="solution-modules" class="max-w-6xl mx-auto px-6 py-10 md:py-20 border-t border-white/5">
+        <h3 class="text-3xl font-bold mb-10 text-center">The Six Core Modules</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Card 1: AI CRM -->
+            <article id="aicrm" class="p-6 rounded-2xl glass neon-glow border-white/10 hover:border-cyan-400/30 transition-colors solution-card">
+                <div class="text-4xl text-cyan-400 mb-3"><i class="fas fa-sitemap"></i></div>
+                <h4 class="font-semibold text-xl">1. Intelligent CRM</h4>
+                <p class="mt-2 text-slate-300 text-sm">A conversational, next-gen CRM that automatically logs interactions, scores leads, and suggests optimal next actions using Natural Language Processing.</p>
+                <ul class="mt-4 text-sm text-slate-400 space-y-1">
+                  <li>• Conversation-driven pipelines (Slack, Email, WhatsApp)</li>
+                  <li>• Predictive lead scoring and automated routing</li>
+                  <li>• Zero manual data entry required</li>
+                </ul>
+            </article>
+
+            <!-- Card 2: AI Phone Caller -->
+            <article id="aivoice" class="p-6 rounded-2xl glass neon-glow border-white/10 hover:border-cyan-400/30 transition-colors solution-card">
+                <div class="text-4xl text-cyan-400 mb-3"><i class="fas fa-comments"></i></div>
+                <h4 class="font-semibold text-xl">2. AI Phone Caller</h4>
+                <p class="mt-2 text-slate-300 text-sm">Automated outbound and inbound calling with ultra-low latency, human-like voices for sales qualification, appointment setting, and support.</p>
+                <ul class="mt-4 text-sm text-slate-400 space-y-1">
+                  <li>• Contextual, human-like speech</li>
+                  <li>• 24/7 sales qualification</li>
+                  <li>• Call outcome logging directly to CRM</li>
+                </ul>
+            </article>
+
+            <!-- Card 3: Lead Scraper -->
+            <article id="leadscraper" class="p-6 rounded-2xl glass neon-glow border-white/10 hover:border-cyan-400/30 transition-colors solution-card">
+                <div class="text-4xl text-cyan-400 mb-3"><i class="fas fa-search-dollar"></i></div>
+                <h4 class="font-semibold text-xl">3. AI Lead Scraper</h4>
+                <p class="mt-2 text-slate-300 text-sm">Targeted data extraction from high-value public sources and specialized platforms, providing verified, deduplicated, and normalized leads daily.</p>
+                <ul class="mt-4 text-sm text-slate-400 space-y-1">
+                  <li>• Custom rule-based scraping for specific industries</li>
+                  <li>• Real-time data validation</li>
+                  <li>• Direct API integration with your existing CRM/DMS</li>
+                </ul>
+            </article>
+
+            <!-- Card 4: AI Workflows -->
+            <article id="aiworkflows" class="p-6 rounded-2xl glass neon-glow border-white/10 hover:border-cyan-400/30 transition-colors solution-card">
+                <div class="text-4xl text-cyan-400 mb-3"><i class="fas fa-robot"></i></div>
+                <h4 class="font-semibold text-xl">4. AI Workflows</h4>
+                <p class="mt-2 text-slate-300 text-sm">Automation pipelines that chain together multiple tasks: processing documents, routing support tickets, generating reports, and automating back-office tasks.</p>
+                <ul class="mt-4 text-sm text-slate-400 space-y-1">
+                  <li>• Event-driven automation triggers</li>
+                  <li>• LLM-powered document summarization</li>
+                  <li>• Integration with ERP and accounting software</li>
+                </ul>
+            </article>
+
+            <!-- Card 5: AI Assistant -->
+            <article id="aiassistant" class="p-6 rounded-2xl glass neon-glow border-white/10 hover:border-cyan-400/30 transition-colors solution-card">
+                <div class="text-4xl text-cyan-400 mb-3"><i class="fas fa-headset"></i></div>
+                <h4 class="font-semibold text-xl">5. AI Assistant / Chatbot</h4>
+                <p class="mt-2 text-slate-300 text-sm">24/7 contextual virtual agents for customer support, onboarding, and scheduling, capable of answering complex queries based on your knowledge base.</p>
+                <ul class="mt-4 text-sm text-slate-400 space-y-1">
+                  <li>• Multi-channel deployment (web, social, app)</li>
+                  <li>• Seamless handoff to human agents</li>
+                  <li>• High-accuracy knowledge retrieval</li>
+                </ul>
+            </article>
+
+            <!-- Card 6: Custom AI Solutions -->
+            <article id="custom" class="p-6 rounded-2xl glass neon-glow border-white/10 hover:border-cyan-400/30 transition-colors solution-card">
+                <div class="text-4xl text-cyan-400 mb-3"><i class="fas fa-flask"></i></div>
+                <h4 class="font-semibold text-xl">6. Custom AI Solutions</h4>
+                <p class="mt-2 text-slate-300 text-sm">Bespoke model training and deployment for domain-specific problems: prediction, anomaly detection, and specialized data classification.</p>
+                <ul class="mt-4 text-sm text-slate-400 space-y-1">
+                  <li>• Rapid 2-week Proof-of-Concept (PoC) development</li>
+                  <li>• Enterprise-grade model security and compliance</li>
+                  <li>• On-premise or cloud deployment options</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t border-white/6 py-10">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div class="col-span-2 md:col-span-2">
+            <a href="index.html" class="flex items-center gap-3 mb-4">
+                <img src="assets/logo.png" alt="Bionic Systems One Logo" class="w-10 h-10 object-contain"/>
+                <span class="text-xl font-extrabold tracking-tight">Bionic Systems One</span>
+            </a>
+            <p class="text-sm text-slate-400 max-w-xs">Building the intelligent foundation for tomorrow's business and beyond. Specializing in capital-efficient AI automation.</p>
+        </div>
+        
+        <!-- Quick Links -->
+        <div>
+            <h4 class="font-semibold text-white mb-3">Quick Links</h4>
+            <ul class="space-y-2 text-sm text-slate-400">
+                <li><a href="solutions.html" class="hover:text-cyan-400 transition">Our Solutions</a></li>
+                <li><a href="index.html#clients" class="hover:text-cyan-400 transition">Clients</a></li>
+                <li><a href="about.html" class="hover:text-cyan-400 transition">About & Vision</a></li>
+                <li><a href="contact.html" class="hover:text-cyan-400 transition">Request Demo</a></li>
+            </ul>
+        </div>
+        
+        <!-- Legal -->
+        <div>
+            <h4 class="font-semibold text-white mb-3">Legal</h4>
+            <ul class="space-y-2 text-sm text-slate-400">
+                <li><a href="privacy.html" class="hover:text-cyan-400 transition">Privacy Policy</a></li>
+                <li><a href="terms.html" class="hover:text-cyan-400 transition">Terms of Service</a></li>
+            </ul>
+        </div>
+
+        <!-- Social -->
+        <div>
+            <h4 class="font-semibold text-white mb-3">Connect</h4>
+            <div class="flex space-x-4 text-xl">
+                <a href="https://instagram.com/bionicsystemsone" target="_blank" aria-label="Instagram" class="hover:text-cyan-400 transition"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/bionicsysone" target="_blank" aria-label="Twitter/X" class="hover:text-cyan-400 transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Facebook" class="hover:text-cyan-400 transition"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <p class="text-xs text-slate-600 mt-4">Built with ❤️ and Netlify</p>
+        </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 mt-10 text-center text-sm text-slate-500">
+        © <span id="year-footer-solutions"></span> Bionic Systems One. All rights reserved.
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <script>
+    document.getElementById('year-footer-solutions').textContent = new Date().getFullYear();
+    
+    // Mobile Menu Logic (Shared across all pages)
+    const mobileBtn = document.getElementById('mobileBtn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menuIcon');
+    const closeIcon = document.getElementById('closeIcon');
+
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('active');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+    }
+
+    mobileBtn.addEventListener('click', () => {
+      const isExpanded = mobileMenu.classList.toggle('active');
+      mobileBtn.setAttribute('aria-expanded', isExpanded);
+      menuIcon.classList.toggle('hidden', isExpanded);
+      closeIcon.classList.toggle('hidden', !isExpanded);
+    });
+
+    // Theme Toggle Logic (Shared across all pages)
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const themeIcon = document.getElementById('theme-icon');
+
+    // Function to set the theme
+    function setTheme(mode) {
+        if (mode === 'light') {
+            body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        } else {
+            body.classList.remove('light-mode');
+            localStorage.setItem('theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+    }
+
+    // Initial check on load
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+        setTheme(storedTheme);
+    } else {
+        // Default to dark mode if no preference is found
+        setTheme('dark'); 
+    }
+
+    // Toggle listener
+    themeToggle.addEventListener('click', () => {
+        const currentMode = body.classList.contains('light-mode') ? 'light' : 'dark';
+        setTheme(currentMode === 'dark' ? 'light' : 'dark');
+    });
+
+    // --- Hyron Core Interactivity Logic ---
+    const pingButton = document.getElementById('ping-button');
+    const statusMessage = document.getElementById('status-message');
+    const meterBar = document.getElementById('agi-meter-bar');
+    const meterPercent = document.getElementById('meter-percent');
+    let pingCount = 0;
+    
+    // Status messages reflecting R&D phase
+    const messages = [
+        "STATUS: Awaiting initialization signal...",
+        "QUERY: Executing baseline diagnostics (0.01% complete)...",
+        "RESPONSE: Kernel activity detected. Core voltage nominal.",
+        "QUERY: Attempting partial resource allocation...",
+        "RESPONSE: Insufficient funding. Core remains in R&D mode.",
+        "STATUS: Hyron acknowledging interaction. Resuming deep sleep.",
+        "QUERY: System ping received. Log entry created.",
+        "RESPONSE: Core systems online. Waiting for next funding milestone.",
+        "STATUS: Core heat signature stable. Development continuing...",
+        "QUERY: User interaction recorded. Thank you for your interest."
+    ];
+
+    function updateHyronStatus() {
+        // Update the status message based on ping count
+        const messageIndex = pingCount % messages.length;
+        statusMessage.textContent = messages[messageIndex];
+        
+        // Ensure meter stays at 0.01%
+        meterBar.style.width = '0.01%'; 
+        meterPercent.textContent = '0.01%';
+
+        // Vibrate the status box slightly to mimic a system alert
+        const container = document.getElementById('ai-chip-container');
+        container.classList.add('shake-once');
+        setTimeout(() => container.classList.remove('shake-once'), 500);
+        
+        pingCount++;
+    }
+
+    pingButton.addEventListener('click', updateHyronStatus);
+
+    // Initial meter width setting (to ensure 0.01% displays on load)
+    window.onload = function() {
+        // Initial setup for the meter bar
+        const meterBarElement = document.getElementById('agi-meter-bar');
+        meterBarElement.style.width = '0.01%'; 
+        // Initial message display
+        statusMessage.textContent = messages[0]; 
+    };
+
+  </script>
+</body>
+</html>
