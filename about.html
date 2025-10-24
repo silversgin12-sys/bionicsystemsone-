@@ -88,8 +88,28 @@
     .neon-glow{
       box-shadow: 0 0 20px rgba(6, 182, 212, 0.1), 0 0 25px rgba(67, 56, 202, 0.1) inset;
     }
+    .cyan-accent-text{
+      background: linear-gradient(90deg, #06b6d4 0%, #67e8f9 100%); /* cta-color to light cyan */
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
     #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
     #mobile-menu.active { max-height: 300px; }
+    
+    /* FIX: Ensure icons overlap correctly */
+    .menu-icon-wrapper {
+        position: relative;
+        width: 24px; /* Explicit width for icon container */
+        height: 24px; /* Explicit height for icon container */
+    }
+    .menu-icon-wrapper > i {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.2s;
+    }
+
     /* Override Tailwind's default text colors */
     .text-slate-200 { color: var(--accent-color); }
     .text-slate-300 { color: #c7d2fe; }
@@ -106,7 +126,8 @@
         <div class="flex items-center gap-3">
           <a href="index.html" class="flex items-center gap-3">
             <img src="assets/logo.png" alt="Bionic Systems One Logo" class="w-10 h-10 object-contain rounded-full border border-white/10"/>
-            <div class="hidden sm:block">
+            <!-- FIX: Removed 'hidden sm:block' to make brand visible on mobile -->
+            <div>
               <h1 class="text-xl font-extrabold tracking-tight">Bionic Systems One</h1>
               <div class="text-xs text-slate-400">Next‑Gen AI Systems</div>
             </div>
@@ -119,17 +140,19 @@
           <a href="index.html#clients" class="hover:text-cyan-400 transition">Clients</a>
           <a href="about.html" class="text-cyan-400 transition">About & Vision</a>
           <a href="contact.html" class="hover:text-cyan-400 transition">Contact</a>
-          <!-- Toggle Button -->
-          <button id="theme-toggle" class="p-2 rounded-full glass hover:bg-white/10 transition border border-white/10">
-              <i id="theme-icon" class="fas fa-sun text-cyan-400 w-4 h-4"></i>
+          <!-- Toggle Button (DESKTOP) -->
+          <button class="theme-toggle-btn p-2 rounded-full glass hover:bg-white/10 transition border border-white/10">
+              <i class="theme-toggle-icon fas fa-sun text-cyan-400 w-4 h-4"></i>
           </button>
           <a href="contact.html" class="ml-2 inline-block px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold text-sm shadow-lg hover:shadow-cyan-400/30 transition-all">Request a Demo</a>
         </nav>
         
-        <!-- Mobile Menu Button -->
+        <!-- Mobile Menu Button - FIXED: Using Font Awesome icons -->
         <button id="mobileBtn" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 rounded-xl glass hover:bg-white/10 transition border border-white/5">
-            <svg id="menuIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            <svg id="closeIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <div class="menu-icon-wrapper">
+                <i id="menuIcon" class="fas fa-bars w-6 h-6"></i>
+                <i id="closeIcon" class="fas fa-times w-6 h-6 hidden"></i>
+            </div>
         </button>
     </div>
     
@@ -174,15 +197,15 @@
                 <h3 class="text-3xl font-bold mb-4 text-slate-200">How We Ensure Velocity</h3>
                 <ul class="space-y-6">
                     <li class="glass p-5 rounded-xl border border-white/10">
-                        <h4 class="font-semibold text-xl text-white mb-1"><i class="fas fa-rocket text-cyan-400 mr-2"></i> Capital Efficiency First</h4>
+                        <h4 class="font-semibold text-xl cyan-accent-text mb-1"><i class="fas fa-rocket text-cyan-400 mr-2"></i> Capital Efficiency First</h4>
                         <p class="text-slate-400 text-sm">We engineer modular, proprietary systems that integrate quickly and require minimal upkeep, maximizing your Return on Automation (ROA) from day one.</p>
                     </li>
                     <li class="glass p-5 rounded-xl border border-white/10">
-                        <h4 class="font-semibold text-xl text-white mb-1"><i class="fas fa-code-branch text-cyan-400 mr-2"></i> Proprietary Architecture</h4>
+                        <h4 class="font-semibold text-xl cyan-accent-text mb-1"><i class="fas fa-code-branch text-cyan-400 mr-2"></i> Proprietary Architecture</h4>
                         <p class="text-slate-400 text-sm">Our solutions are built on a highly optimized, custom-developed core logic, ensuring superior speed, security, and the ability to handle highly specific domain tasks.</p>
                     </li>
                     <li class="glass p-5 rounded-xl border border-white/10">
-                        <h4 class="font-semibold text-xl text-white mb-1"><i class="fas fa-shield-alt text-cyan-400 mr-2"></i> Security and Compliance</h4>
+                        <h4 class="font-semibold text-xl cyan-accent-text mb-1"><i class="fas fa-shield-alt text-cyan-400 mr-2"></i> Security and Compliance</h4>
                         <p class="text-slate-400 text-sm">Our focus on high-value sectors means data privacy, encryption, and regulatory compliance are built into the architecture, not bolted on later.</p>
                     </li>
                 </ul>
@@ -198,7 +221,7 @@
         <div class="grid md:grid-cols-3 gap-8">
             <!-- Project Hyron -->
             <div class="glass p-8 rounded-2xl border border-indigo-600/30">
-                <h4 class="text-2xl font-bold mb-3 text-white"><i class="fas fa-brain text-cyan-400 mr-2"></i> Project Hyron</h4>
+                <h4 class="text-2xl font-bold mb-3 cyan-accent-text"><i class="fas fa-brain text-cyan-400 mr-2"></i> Project Hyron</h4>
                 <p class="text-slate-300">
                     Hyron is our internal research initiative dedicated to the development of **Artificial General Intelligence (AGI)**. While currently at 0.01% completion, Hyron guides our current automation design, ensuring every module is built with the future of evolving intelligence in mind.
                 </p>
@@ -206,7 +229,7 @@
             
             <!-- Medical Industry Focus -->
             <div class="glass p-8 rounded-2xl border border-indigo-600/30">
-                <h4 class="text-2xl font-bold mb-3 text-white"><i class="fas fa-stethoscope text-cyan-400 mr-2"></i> The Medical Horizon</h4>
+                <h4 class="text-2xl font-bold mb-3 cyan-accent-text"><i class="fas fa-stethoscope text-cyan-400 mr-2"></i> The Medical Horizon</h4>
                 <p class="text-slate-300">
                     Our next strategic market is the medical industry. We aim to deploy BSO systems for high-stakes tasks like diagnostic analysis, personalized treatment planning, and pharmaceutical discovery pipelines—where AGI can have the most direct human impact.
                 </p>
@@ -239,7 +262,7 @@
         
         <!-- Quick Links -->
         <div>
-            <h4 class="font-semibold text-white mb-3">Quick Links</h4>
+            <h4 class="font-semibold cyan-accent-text mb-3">Quick Links</h4>
             <ul class="space-y-2 text-sm text-slate-400">
                 <li><a href="solutions.html" class="hover:text-cyan-400 transition">Our Solutions</a></li>
                 <li><a href="index.html#clients" class="hover:text-cyan-400 transition">Clients</a></li>
@@ -250,7 +273,7 @@
         
         <!-- Legal -->
         <div>
-            <h4 class="font-semibold text-white mb-3">Legal</h4>
+            <h4 class="font-semibold cyan-accent-text mb-3">Legal</h4>
             <ul class="space-y-2 text-sm text-slate-400">
                 <li><a href="privacy.html" class="hover:text-cyan-400 transition">Privacy Policy</a></li>
                 <li><a href="terms.html" class="hover:text-cyan-400 transition">Terms of Service</a></li>
@@ -259,12 +282,19 @@
 
         <!-- Social -->
         <div>
-            <h4 class="font-semibold text-white mb-3">Connect</h4>
+            <h4 class="font-semibold cyan-accent-text mb-3">Connect</h4>
             <div class="flex space-x-4 text-xl">
                 <a href="https://instagram.com/bionicsystemsone" target="_blank" aria-label="Instagram" class="hover:text-cyan-400 transition"><i class="fab fa-instagram"></i></a>
                 <a href="https://twitter.com/bionicsysone" target="_blank" aria-label="Twitter/X" class="hover:text-cyan-400 transition"><i class="fab fa-twitter"></i></a>
                 <a href="#" aria-label="Facebook" class="hover:text-cyan-400 transition"><i class="fab fa-facebook-f"></i></a>
             </div>
+            
+            <!-- NEW THEME TOGGLE FOR MOBILE ACCESSIBILITY -->
+            <button class="theme-toggle-btn mt-4 px-4 py-2 rounded-full glass border border-white/10 text-sm flex items-center gap-2 hover:bg-white/10 transition">
+                <i class="theme-toggle-icon fas fa-sun text-cyan-400 w-4 h-4"></i>
+                <span>Toggle Theme</span>
+            </button>
+            
             <p class="text-xs text-slate-600 mt-4">Built with ❤️ and Netlify</p>
         </div>
     </div>
@@ -297,23 +327,27 @@
       closeIcon.classList.toggle('hidden', !isExpanded);
     });
 
-    // Theme Toggle Logic (Shared across all pages)
-    const themeToggle = document.getElementById('theme-toggle');
+    // Theme Toggle Logic (Shared across all pages) - FIXED
     const body = document.body;
-    const themeIcon = document.getElementById('theme-icon');
+    const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
+    const themeIcons = document.querySelectorAll('.theme-toggle-icon');
 
     // Function to set the theme
     function setTheme(mode) {
         if (mode === 'light') {
             body.classList.add('light-mode');
             localStorage.setItem('theme', 'light');
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
+            themeIcons.forEach(icon => {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            });
         } else {
             body.classList.remove('light-mode');
             localStorage.setItem('theme', 'dark');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
+            themeIcons.forEach(icon => {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            });
         }
     }
 
@@ -326,12 +360,15 @@
         setTheme('dark'); 
     }
 
-    // Toggle listener
-    themeToggle.addEventListener('click', () => {
-        const currentMode = body.classList.contains('light-mode') ? 'light' : 'dark';
-        setTheme(currentMode === 'dark' ? 'light' : 'dark');
+    // Toggle listeners (Attach to all buttons)
+    themeToggleBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            const currentMode = body.classList.contains('light-mode') ? 'light' : 'dark';
+            setTheme(currentMode === 'dark' ? 'light' : 'dark');
+        });
     });
 
   </script>
 </body>
 </html>
+
