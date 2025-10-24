@@ -52,7 +52,9 @@
     /* Inverting specific elements for light mode */
     body.light-mode .text-slate-200, 
     body.light-mode .text-slate-300, 
-    body.light-mode .text-slate-400 { 
+    body.light-mode .text-slate-400,
+    body.light-mode .viz-dark-text,
+    body.light-mode .footer-text { 
         color: var(--text-color) !important; 
     }
     body.light-mode .text-white { 
@@ -73,6 +75,41 @@
         color: var(--text-color); /* Hyron text becomes black/dark slate */
         text-shadow: none; /* Remove glow on Hyron text */
     }
+    body.light-mode .accent-text,
+    body.light-mode .cyan-accent-text {
+        color: transparent !important; /* Keep gradient visible */
+    }
+    body.light-mode .text-cyan-400 {
+        color: var(--cta-color) !important; /* Keep Cyan as the primary accent color */
+    }
+    /* NEW: Light mode for Hyron chip */
+    body.light-mode #ai-chip {
+        animation: core-pulse-light 3s infinite alternate ease-in-out;
+    }
+    body.light-mode #ai-chip::before {
+        background-image:
+            linear-gradient(to right, rgba(67, 56, 202, 0.3) 2px, transparent 2px),
+            linear-gradient(to bottom, rgba(67, 56, 202, 0.3) 2px, transparent 2px),
+            linear-gradient(to right, #06b6d4 0.5px, transparent 0.5px),
+            linear-gradient(to bottom, #06b6d4 0.5px, transparent 0.5px);
+        box-shadow: 0 0 15px #06b6d4 inset;
+        opacity: 0.6;
+    }
+    body.light-mode #hyron-cube {
+        background: rgba(255, 255, 255, 0.8);
+        border-color: #06b6d4;
+        box-shadow: 0 0 20px #06b6d4, inset 0 0 10px rgba(0, 0, 0, 0.2), inset 0 0 0 40px #4338ca, inset 20px 20px 0 10px #4338ca, inset -20px -20px 0 10px #4338ca;
+    }
+    body.light-mode #hyron-cube span {
+        color: #06b6d4;
+        text-shadow: none;
+    }
+    @keyframes core-pulse-light {
+        0% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.1); filter: brightness(1); }
+        50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.2); filter: brightness(1.05); }
+        100% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.1); filter: brightness(1); }
+    }
+
 
     /* ------------------------------------------------------------- */
     /* SHARED STYLES */
@@ -80,6 +117,13 @@
 
     .accent-text{
       background: linear-gradient(90deg, var(--cta-color) 10%, #4f46e5 50%, var(--primary-color) 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    /* NEW: Gradient for other headings */
+    .cyan-accent-text{
+      background: linear-gradient(90deg, #06b6d4 0%, #67e8f9 100%); /* cta-color to light cyan */
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -99,13 +143,27 @@
     .text-slate-300 { color: #c7d2fe; }
     .text-slate-400 { color: #a5b4fc; }
 
+    /* NEW: Menu Icon Wrapper */
+    .menu-icon-wrapper {
+        position: relative;
+        width: 24px; /* Explicit width for icon container */
+        height: 24px; /* Explicit height for icon container */
+    }
+    .menu-icon-wrapper > i {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.2s;
+    }
+
     /* --- HYRON GIMMICK STYLES (V1 Clean Base - Fixed) --- */
     
     :root {
-      --hyron-glow: var(--cta-color); 
+      --hyron-glow: #06b6d4; /* NEW: Back to site's Cyan */
+      --hyron-pulse-color: #ffffff; /* NEW: Pulse to bright white */
       --chip-size: 200px;
-      --internal-dot-color: rgba(255, 255, 255, 0.8);
-      --circuit-opacity: 0.3;
+      --internal-dot-color: rgba(255, 255, 255, 0.9); /* NEW: Bright White core */
+      --circuit-opacity: 0.4; /* NEW: Brighter circuits */
     }
 
     /* Outer Container for 3D Tilt and Animation */
@@ -127,9 +185,9 @@
 
     /* Breathing Animation Keyframes */
     @keyframes core-pulse {
-        0% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.2); filter: brightness(1); }
-        50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.5); filter: brightness(1.2); }
-        100% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.2); filter: brightness(1); }
+        0% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.4); filter: brightness(1); } /* Cyan */
+        50% { box-shadow: 0 0 35px rgba(255, 255, 255, 0.8); filter: brightness(1.3); } /* Bright White */
+        100% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.4); filter: brightness(1); } /* Cyan */
     }
 
     /* Motherboard Circuitry Background (Simple Geometric Traces) */
@@ -144,7 +202,7 @@
         
         /* --- Simple Geometric Circuitry --- */
         background-image:
-            /* Main structural lines (Indigo/Purple for depth) */
+            /* Main structural lines (Indigo for depth) */
             linear-gradient(to right, rgba(67, 56, 202, 0.5) 2px, transparent 2px),
             linear-gradient(to bottom, rgba(67, 56, 202, 0.5) 2px, transparent 2px),
             /* Fine glowing trace lines (Cyan for active data) */
@@ -170,7 +228,7 @@
         justify-content: center;
         text-align: center;
         
-        background: rgba(67, 56, 202, 0.6); /* Translucent indigo base */
+        background: rgba(67, 56, 202, 0.6); /* NEW: Back to Translucent indigo base */
         border: 4px solid var(--hyron-glow);
         
         /* --- VISIBLE INTERNAL ARCHITECTURE (Dots) --- */
@@ -190,8 +248,8 @@
     #hyron-cube span {
         font-size: 3.5rem;
         font-weight: 800;
-        color: white;
-        text-shadow: 0 0 10px var(--hyron-glow);
+        color: var(--hyron-glow); /* NEW: Changed from white to cyan */
+        text-shadow: 0 0 15px var(--hyron-glow); /* NEW: Changed glow to cyan */
         letter-spacing: 3px;
     }
     
@@ -208,7 +266,7 @@
     /* Solution Card Hover Effect */
     .solution-card:hover {
         transform: translateY(-4px) scale(1.01);
-        box-shadow: 0 10px 20px rgba(6, 182, 212, 0.15);
+        box-shadow: 0 10px 20px rgba(6, 182, 212, 0.15); /* NEW: Back to Cyan glow */
         border-color: var(--hyron-glow);
     }
     .solution-card {
@@ -237,7 +295,8 @@
         <div class="flex items-center gap-3">
           <a href="index.html" class="flex items-center gap-3">
             <img src="assets/logo.png" alt="Bionic Systems One Logo" class="w-10 h-10 object-contain rounded-full border border-white/10"/>
-            <div class="hidden sm:block">
+            <!-- FIX: Removed 'hidden sm:block' to make brand visible on mobile -->
+            <div>
               <h1 class="text-xl font-extrabold tracking-tight">Bionic Systems One</h1>
               <div class="text-xs text-slate-400">Next‑Gen AI Systems</div>
             </div>
@@ -251,16 +310,20 @@
           <a href="about.html" class="hover:text-cyan-400 transition">About & Vision</a>
           <a href="contact.html" class="hover:text-cyan-400 transition">Contact</a>
           <!-- Toggle Button -->
-          <button id="theme-toggle" class="p-2 rounded-full glass hover:bg-white/10 transition border border-white/10">
-              <i id="theme-icon" class="fas fa-sun text-cyan-400 w-4 h-4"></i>
+          <!-- FIX: Added .theme-toggle-btn and .theme-toggle-icon classes -->
+          <button class="theme-toggle-btn p-2 rounded-full glass hover:bg-white/10 transition border border-white/10">
+              <i class="theme-toggle-icon fas fa-sun text-cyan-400 w-4 h-4"></i>
           </button>
           <a href="contact.html" class="ml-2 inline-block px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-400 text-white font-semibold text-sm shadow-lg hover:shadow-cyan-400/30 transition-all">Request a Demo</a>
         </nav>
         
         <!-- Mobile Menu Button -->
+        <!-- FIX: Replaced SVG with Font Awesome icons -->
         <button id="mobileBtn" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 rounded-xl glass hover:bg-white/10 transition border border-white/5">
-            <svg id="menuIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            <svg id="closeIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <div class="menu-icon-wrapper">
+                <i id="menuIcon" class="fas fa-bars w-6 h-6"></i>
+                <i id="closeIcon" class="fas fa-times w-6 h-6 hidden"></i>
+            </div>
         </button>
     </div>
     
@@ -317,8 +380,8 @@
                         <span>Project Completion:</span>
                         <span id="meter-percent" class="text-cyan-400 font-semibold">0.01%</span>
                     </div>
-                    <div id="agi-meter" class="w-full">
-                        <div id="agi-meter-bar" style="width: 0.01%;"></div>
+                    <div id="agi-meter" class="w-full bg-black/50 rounded-full h-2 border border-white/10 overflow-hidden">
+                        <div id="agi-meter-bar" style="width: 0.01%;" class="h-full rounded-full"></div>
                     </div>
                 </div>
             </div>
@@ -414,12 +477,13 @@
                 <img src="assets/logo.png" alt="Bionic Systems One Logo" class="w-10 h-10 object-contain"/>
                 <span class="text-xl font-extrabold tracking-tight">Bionic Systems One</span>
             </a>
-            <p class="text-sm text-slate-400 max-w-xs">Building the intelligent foundation for tomorrow's business and beyond. Specializing in capital-efficient AI automation.</p>
+            <p class="text-sm text-slate-400 max-w-xs footer-text">Building the intelligent foundation for tomorrow's business and beyond. Specializing in capital-efficient AI automation.</p>
         </div>
         
         <!-- Quick Links -->
         <div>
-            <h4 class="font-semibold text-white mb-3">Quick Links</h4>
+            <!-- FIX: Changed from gradient to solid cyan -->
+            <h4 class="font-semibold text-cyan-400 mb-3">Quick Links</h4>
             <ul class="space-y-2 text-sm text-slate-400">
                 <li><a href="solutions.html" class="hover:text-cyan-400 transition">Our Solutions</a></li>
                 <li><a href="index.html#clients" class="hover:text-cyan-400 transition">Clients</a></li>
@@ -430,7 +494,8 @@
         
         <!-- Legal -->
         <div>
-            <h4 class="font-semibold text-white mb-3">Legal</h4>
+            <!-- FIX: Changed from gradient to solid cyan -->
+            <h4 class="font-semibold text-cyan-400 mb-3">Legal</h4>
             <ul class="space-y-2 text-sm text-slate-400">
                 <li><a href="privacy.html" class="hover:text-cyan-400 transition">Privacy Policy</a></li>
                 <li><a href="terms.html" class="hover:text-cyan-400 transition">Terms of Service</a></li>
@@ -439,128 +504,161 @@
 
         <!-- Social -->
         <div>
-            <h4 class="font-semibold text-white mb-3">Connect</h4>
+            <!-- FIX: Changed from gradient to solid cyan -->
+            <h4 class="font-semibold text-cyan-400 mb-3">Connect</h4>
             <div class="flex space-x-4 text-xl">
                 <a href="https://instagram.com/bionicsystemsone" target="_blank" aria-label="Instagram" class="hover:text-cyan-400 transition"><i class="fab fa-instagram"></i></a>
                 <a href="https://twitter.com/bionicsysone" target="_blank" aria-label="Twitter/X" class="hover:text-cyan-400 transition"><i class="fab fa-twitter"></i></a>
                 <a href="#" aria-label="Facebook" class="hover:text-cyan-400 transition"><i class="fab fa-facebook-f"></i></a>
             </div>
-            <p class="text-xs text-slate-600 mt-4">Built with ❤️ and Netlify</p>
+            <!-- NEW THEME TOGGLE FOR MOBILE ACCESSIBILITY -->
+            <button class="theme-toggle-btn mt-4 px-4 py-2 rounded-full glass border border-white/10 text-sm flex items-center gap-2 hover:bg-white/10 transition">
+                <i class="theme-toggle-icon fas fa-sun text-cyan-400 w-4 h-4"></i>
+                <span class="viz-dark-text">Toggle Theme</span>
+            </button>
+            <p class="text-xs text-slate-600 mt-4 footer-text">Built with ❤️ and Netlify</p>
         </div>
     </div>
-    <div class="max-w-6xl mx-auto px-6 mt-10 text-center text-sm text-slate-500">
+    <div class="max-w-6xl mx-auto px-6 mt-10 text-center text-sm text-slate-500 footer-text">
         © <span id="year-footer-solutions"></span> Bionic Systems One. All rights reserved.
     </div>
   </footer>
   <!-- End Footer -->
 
+  <!-- 
+    FIX: All scripts are now wrapped in DOMContentLoaded to prevent conflicts.
+    FIX: Corrected syntax error in mobileBtn listener.
+    FIX: Replaced window.onload with logic inside DOMContentLoaded.
+  -->
   <script>
-    document.getElementById('year-footer-solutions').textContent = new Date().getFullYear();
+    document.addEventListener('DOMContentLoaded', function() {
     
-    // Mobile Menu Logic (Shared across all pages)
-    const mobileBtn = document.getElementById('mobileBtn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = document.getElementById('menuIcon');
-    const closeIcon = document.getElementById('closeIcon');
-
-    function closeMobileMenu() {
-        mobileMenu.classList.remove('active');
-        mobileBtn.setAttribute('aria-expanded', 'false');
-        menuIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-    }
-
-    mobileBtn.addEventListener('click', () => {
-      const isExpanded = mobileMenu.classList.toggle('active');
-      mobileBtn.setAttribute('aria-expanded', isExpanded);
-      menuIcon.classList.toggle('hidden', isExpanded);
-      closeIcon.classList.toggle('hidden', !isExpanded);
-    });
-
-    // Theme Toggle Logic (Shared across all pages)
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
-    const themeIcon = document.getElementById('theme-icon');
-
-    // Function to set the theme
-    function setTheme(mode) {
-        if (mode === 'light') {
-            body.classList.add('light-mode');
-            localStorage.setItem('theme', 'light');
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-        } else {
-            body.classList.remove('light-mode');
-            localStorage.setItem('theme', 'dark');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
+        // --- Footer Year Logic ---
+        const yearSpan = document.getElementById('year-footer-solutions');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
         }
-    }
 
-    // Initial check on load
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) {
-        setTheme(storedTheme);
-    } else {
-        // Default to dark mode if no preference is found
-        setTheme('dark'); 
-    }
+        // --- Mobile Menu Logic (Shared across all pages) ---
+        const mobileBtn = document.getElementById('mobileBtn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menuIcon');
+        const closeIcon = document.getElementById('closeIcon');
 
-    // Toggle listener
-    themeToggle.addEventListener('click', () => {
-        const currentMode = body.classList.contains('light-mode') ? 'light' : 'dark';
-        setTheme(currentMode === 'dark' ? 'light' : 'dark');
+        function closeMobileMenu() {
+            if (mobileMenu) mobileMenu.classList.remove('active');
+            if (mobileBtn) mobileBtn.setAttribute('aria-expanded', 'false');
+            if (menuIcon) menuIcon.classList.remove('hidden');
+            if (closeIcon) closeIcon.classList.add('hidden');
+        }
+
+        if (mobileBtn && mobileMenu && menuIcon && closeIcon) {
+            mobileBtn.addEventListener('click', () => {
+              const isExpanded = mobileMenu.classList.toggle('active');
+              mobileBtn.setAttribute('aria-expanded', isExpanded); // <-- FIX: Corrected syntax 'isExpanded'
+              menuIcon.classList.toggle('hidden', isExpanded);
+              closeIcon.classList.toggle('hidden', !isExpanded);
+            });
+            
+            // Add listeners to links to close menu on click
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+        }
+
+        // --- Theme Toggle Logic (Shared across all pages) ---
+        const body = document.body;
+        const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
+        const themeIcons = document.querySelectorAll('.theme-toggle-icon');
+
+        function setTheme(mode) {
+            if (mode === 'light') {
+                body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+                themeIcons.forEach(icon => {
+                    if (icon) {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                });
+            } else {
+                body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+                themeIcons.forEach(icon => {
+                    if (icon) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    }
+                });
+            }
+        }
+
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+        } else {
+            setTheme('dark'); 
+        }
+
+        themeToggleBtns.forEach(button => {
+            button.addEventListener('click', () => {
+                const currentMode = body.classList.contains('light-mode') ? 'light' : 'dark';
+                setTheme(currentMode === 'dark' ? 'light' : 'dark');
+            });
+        });
+
+        // --- Hyron Core Interactivity Logic ---
+        const pingButton = document.getElementById('ping-button');
+        const statusMessage = document.getElementById('status-message');
+        const meterBar = document.getElementById('agi-meter-bar');
+        const meterPercent = document.getElementById('meter-percent');
+        let pingCount = 0;
+        
+        const messages = [
+            "STATUS: Awaiting initialization signal...",
+            "QUERY: Executing baseline diagnostics (0.01% complete)...",
+            "RESPONSE: Kernel activity detected. Core voltage nominal.",
+            "QUERY: Attempting partial resource allocation...",
+            "RESPONSE: Insufficient funding. Core remains in R&D mode.",
+            "STATUS: Hyron acknowledging interaction. Resuming deep sleep.",
+            "QUERY: System ping received. Log entry created.",
+            "RESPONSE: Core systems online. Waiting for next funding milestone.",
+            "STATUS: Core heat signature stable. Development continuing...",
+            "QUERY: User interaction recorded. Thank you for your interest."
+        ];
+
+        function updateHyronStatus() {
+            const messageIndex = pingCount % messages.length;
+            if (statusMessage) {
+                statusMessage.textContent = messages[messageIndex];
+            }
+            
+            if (meterBar) meterBar.style.width = '0.01%'; 
+            if (meterPercent) meterPercent.textContent = '0.01%';
+
+            const container = document.getElementById('ai-chip-container');
+            if (container) {
+                container.classList.add('shake-once');
+                setTimeout(() => container.classList.remove('shake-once'), 500);
+            }
+            
+            pingCount++;
+        }
+
+        if (pingButton) {
+            pingButton.addEventListener('click', updateHyronStatus);
+        }
+
+        // Initial meter width setting (FIXED: Replaced window.onload)
+        if (meterBar) {
+            meterBar.style.width = '0.01%'; 
+        }
+        if (statusMessage) {
+            statusMessage.textContent = messages[0]; 
+        }
+
     });
-
-    // --- Hyron Core Interactivity Logic ---
-    const pingButton = document.getElementById('ping-button');
-    const statusMessage = document.getElementById('status-message');
-    const meterBar = document.getElementById('agi-meter-bar');
-    const meterPercent = document.getElementById('meter-percent');
-    let pingCount = 0;
-    
-    // Status messages reflecting R&D phase
-    const messages = [
-        "STATUS: Awaiting initialization signal...",
-        "QUERY: Executing baseline diagnostics (0.01% complete)...",
-        "RESPONSE: Kernel activity detected. Core voltage nominal.",
-        "QUERY: Attempting partial resource allocation...",
-        "RESPONSE: Insufficient funding. Core remains in R&D mode.",
-        "STATUS: Hyron acknowledging interaction. Resuming deep sleep.",
-        "QUERY: System ping received. Log entry created.",
-        "RESPONSE: Core systems online. Waiting for next funding milestone.",
-        "STATUS: Core heat signature stable. Development continuing...",
-        "QUERY: User interaction recorded. Thank you for your interest."
-    ];
-
-    function updateHyronStatus() {
-        // Update the status message based on ping count
-        const messageIndex = pingCount % messages.length;
-        statusMessage.textContent = messages[messageIndex];
-        
-        // Ensure meter stays at 0.01%
-        meterBar.style.width = '0.01%'; 
-        meterPercent.textContent = '0.01%';
-
-        // Vibrate the status box slightly to mimic a system alert
-        const container = document.getElementById('ai-chip-container');
-        container.classList.add('shake-once');
-        setTimeout(() => container.classList.remove('shake-once'), 500);
-        
-        pingCount++;
-    }
-
-    pingButton.addEventListener('click', updateHyronStatus);
-
-    // Initial meter width setting (to ensure 0.01% displays on load)
-    window.onload = function() {
-        // Initial setup for the meter bar
-        const meterBarElement = document.getElementById('agi-meter-bar');
-        meterBarElement.style.width = '0.01%'; 
-        // Initial message display
-        statusMessage.textContent = messages[0]; 
-    };
-
   </script>
 </body>
 </html>
+
