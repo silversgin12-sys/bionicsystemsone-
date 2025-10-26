@@ -5,7 +5,7 @@
 <!-- Home Page -->
 
 <url>
-<loc>https://www.bionicsystemsone.com/index.html</loc>
+<loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/index.html</loc>
 <lastmod>2025-10-26</lastmod>
 <priority>1.00</priority>
 </url>
@@ -13,7 +13,7 @@
 <!-- Solutions Page (FIXED) -->
 
 <url>
-<loc>https://www.google.com/url?sa=E&source=gmail&q=https://www.bionicsystemsone/solutions.html</loc>
+<loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/solutions.html</loc>
 <lastmod>2025-10-26</lastmod>
 <priority>0.90</priority>
 </url>
@@ -48,6 +48,14 @@
 <loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/terms.html</loc>
 <lastmod>2025-10-26</lastmod>
 <priority>0.50</priority>
+</url>
+
+<!-- Success Page (FIXED) -->
+
+<url>
+<loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/success.html</loc>
+<lastmod>2025-10-26</lastmod>
+<priority>0.40</priority>
 </url>
 
 </urlset>
