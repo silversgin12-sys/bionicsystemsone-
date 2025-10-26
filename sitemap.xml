@@ -5,47 +5,47 @@
 <!-- Home Page -->
 
 <url>
-<loc>https://www.your-domain.com/index.html</loc>
+<loc>https://www.bionicsystemsone.com/index.html</loc>
 <lastmod>2025-10-26</lastmod>
 <priority>1.00</priority>
 </url>
 
-<!-- Solutions Page -->
+<!-- Solutions Page (FIXED) -->
 
 <url>
-<loc>https://www.google.com/search?q=https://www.your-domain.com/solutions.html</loc>
+<loc>https://www.google.com/url?sa=E&source=gmail&q=https://www.bionicsystemsone/solutions.html</loc>
 <lastmod>2025-10-26</lastmod>
 <priority>0.90</priority>
 </url>
 
-<!-- About Page -->
+<!-- About Page (FIXED) -->
 
 <url>
-<loc>https://www.google.com/search?q=https://www.your-domain.com/about.html</loc>
+<loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/about.html</loc>
 <lastmod>2025-10-26</lastmod>
 <priority>0.80</priority>
 </url>
 
-<!-- Contact Page -->
+<!-- Contact Page (FIXED) -->
 
 <url>
-<loc>https://www.google.com/search?q=https://www.your-domain.com/contact.html</loc>
+<loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/contact.html</loc>
 <lastmod>2025-10-26</lastmod>
 <priority>0.80</priority>
 </url>
 
-<!-- Privacy Policy -->
+<!-- Privacy Policy (FIXED) -->
 
 <url>
-<loc>https://www.google.com/search?q=https://www.your-domain.com/privacy.html</loc>
+<loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/privacy.html</loc>
 <lastmod>2025-10-26</lastmod>
 <priority>0.50</priority>
 </url>
 
-<!-- Terms of Service -->
+<!-- Terms of Service (FIXED) -->
 
 <url>
-<loc>https://www.google.com/search?q=https://www.your-domain.com/terms.html</loc>
+<loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/terms.html</loc>
 <lastmod>2025-10-26</lastmod>
 <priority>0.50</priority>
 </url>
