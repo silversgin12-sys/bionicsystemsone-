@@ -1,8 +1,3 @@
-Allow all search engines full access to the site
-
 User-agent: *
 Allow: /
-
-Provide a link to the sitemap
-
-Sitemap: https://www.google.com/search?q=https://www.your-domain.com/sitemap.xml
+Sitemap: https://www.bionicsystemsone.com/sitemap.xml
