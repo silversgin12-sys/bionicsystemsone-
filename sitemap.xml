@@ -1,53 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Home Page -->
   <url>
     <loc>https://www.bionicsystemsone.com/</loc>
     <lastmod>2025-10-26</lastmod>
     <priority>1.00</priority>
   </url>
-
-  <!-- Solutions Page -->
   <url>
     <loc>https://www.bionicsystemsone.com/solutions.html</loc>
     <lastmod>2025-10-26</lastmod>
     <priority>0.90</priority>
   </url>
-
-  <!-- About Page -->
   <url>
     <loc>https://www.bionicsystemsone.com/about.html</loc>
     <lastmod>2025-10-26</lastmod>
     <priority>0.80</priority>
   </url>
-
-  <!-- Contact Page -->
   <url>
     <loc>https://www.bionicsystemsone.com/contact.html</loc>
     <lastmod>2025-10-26</lastmod>
     <priority>0.80</priority>
   </url>
-
-  <!-- Privacy Policy -->
   <url>
     <loc>https://www.bionicsystemsone.com/privacy.html</loc>
     <lastmod>2025-10-26</lastmod>
     <priority>0.50</priority>
   </url>
-
-  <!-- Terms of Service -->
   <url>
     <loc>https://www.bionicsystemsone.com/terms.html</loc>
     <lastmod>2025-10-26</lastmod>
     <priority>0.50</priority>
   </url>
-
-  <!-- Success Page -->
   <url>
     <loc>https://www.bionicsystemsone.com/success.html</loc>
     <lastmod>2025-10-26</lastmod>
     <priority>0.40</priority>
   </url>
-
 </urlset>
