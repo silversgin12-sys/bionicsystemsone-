@@ -10,7 +10,7 @@
 <priority>1.00</priority>
 </url>
 
-<!-- Solutions Page (FIXED) -->
+<!-- Solutions Page -->
 
 <url>
 <loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/solutions.html</loc>
@@ -18,7 +18,7 @@
 <priority>0.90</priority>
 </url>
 
-<!-- About Page (FIXED) -->
+<!-- About Page -->
 
 <url>
 <loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/about.html</loc>
@@ -26,7 +26,7 @@
 <priority>0.80</priority>
 </url>
 
-<!-- Contact Page (FIXED) -->
+<!-- Contact Page -->
 
 <url>
 <loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/contact.html</loc>
@@ -34,7 +34,7 @@
 <priority>0.80</priority>
 </url>
 
-<!-- Privacy Policy (FIXED) -->
+<!-- Privacy Policy -->
 
 <url>
 <loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/privacy.html</loc>
@@ -42,7 +42,7 @@
 <priority>0.50</priority>
 </url>
 
-<!-- Terms of Service (FIXED) -->
+<!-- Terms of Service -->
 
 <url>
 <loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/terms.html</loc>
@@ -50,7 +50,7 @@
 <priority>0.50</priority>
 </url>
 
-<!-- Success Page (FIXED & ADDED) -->
+<!-- Success Page -->
 
 <url>
 <loc>https://www.google.com/search?q=https://www.bionicsystemsone.com/success.html</loc>
@@ -59,4 +59,3 @@
 </url>
 
 </urlset>
-
